@@ -113,9 +113,11 @@ button{font-family:inherit;border:none;background:none;color:inherit;cursor:poin
 .icon-btn:hover{color:var(--ink);background:var(--card3)}
 .icon-btn svg{width:18px;height:18px}
 .player{display:grid;grid-template-columns:minmax(260px,380px) 1fr;gap:24px 30px;align-items:start;grid-template-areas:"art info" "tracks info"}
-.pa-art{grid-area:art}
-.pa-info{grid-area:info;min-width:0}
-.pa-tracks{grid-area:tracks}
+.pa-art{grid-area:art;min-width:0;max-width:100%}
+.pa-info{grid-area:info;min-width:0;max-width:100%}
+.pa-tracks{grid-area:tracks;min-width:0;max-width:100%}
+.stage-art{width:100%}
+.main{overflow-x:clip}
 @media (min-width:821px){.pa-tracks .tracklist{max-height:560px;overflow-y:auto;padding-right:4px}}
 .stage-art{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:1;box-shadow:0 24px 60px rgba(0,0,0,.55)}
 .stage-art>svg{width:100%;height:100%;display:block}
@@ -162,7 +164,7 @@ button{font-family:inherit;border:none;background:none;color:inherit;cursor:poin
 .alt-line b{color:var(--ink);font-weight:800}
 .alt-line span{color:var(--ink3);font-size:12.5px}
 .pron{color:var(--amber);font-size:13px;font-weight:600}
-.tracklist{margin-top:2px}
+.tracklist{margin-top:2px;position:relative}
 .track-row{display:flex;align-items:center;gap:13px;padding:9px 12px;border-radius:10px;cursor:pointer;transition:.12s}
 .track-row:hover{background:var(--card2)}
 .track-row.current{background:var(--card2)}
@@ -881,6 +883,128 @@ const CAT_STUDIO={id:"studio",group:"music",name:"스튜디오 & 작업",sub:"In
 {lv:3,en:"We caught lightning in a bottle tonight.",kr:"오늘 우리, 병 속에 번개를 담았어. (기적 같은 순간을 잡았어)",sit:"전설의 세션 마무리",tip:"lightning in a bottle = 재현 불가능한 마법의 순간. 가사로도 최고.",w:[["lightning in a bottle","기적적 순간의 포착","lightning — 번개 (가사 단골)"]]}
 ]};
 
+/* ===== 원어민 고빈도 표현 추가팩 (+10/카테고리) ===== */
+CAT_CAFE.sentences.push(
+{lv:1,en:"What time do you close?",kr:"몇 시에 문 닫아요?",sit:"마감 시간 확인",w:[["close","문을 닫다","closed = 영업 종료"]]},
+{lv:1,en:"Do you take cards?",kr:"카드 되나요?",sit:"결제 수단 확인",tip:"take = (결제를) 받다. Cash only면 현금만!",w:[["take","(결제 수단을) 받다","Do you take Apple Pay?"]]},
+{lv:1,en:"Can we get one more of these?",kr:"이거 하나만 더 주세요.",sit:"추가 주문",w:[["one more of these","이거 하나 더","가리키며 말하면 끝"]]},
+{lv:2,en:"Can I add a shot of espresso?",kr:"샷 추가할 수 있나요?",sit:"커피 커스텀",tip:"add a shot = 샷 추가. 두 샷은 double shot.",w:[["add","추가하다","extra shot도 같은 뜻"]]},
+{lv:2,en:"For here or to go?",kr:"드시고 가세요, 포장이세요? (직원 질문)",sit:"주문 마지막 단골 질문",tip:"직원이 제일 많이 하는 질문. For here! / To go! 로 즉답.",w:[["for here","매장에서","to go = 포장"]]},
+{lv:2,en:"Could I get the dressing on the side?",kr:"드레싱은 따로 주시겠어요?",sit:"소스 분리 요청",tip:"on the side = 곁들여 따로. 소스·시럽 뭐든 적용.",w:[["on the side","따로, 곁들여서","sauce on the side"]]},
+{lv:2,en:"Are refills free?",kr:"리필 무료예요?",sit:"리필 확인",w:[["free","무료인","free refills = 무한 리필"]]},
+{lv:3,en:"Can I start a tab?",kr:"장부 열어주시겠어요? (마실 때마다 계산 말고 한 번에)",sit:"바·펍에서",tip:"tab = 외상 장부. 마지막에 Close my tab, please.로 정산.",w:[["tab","(바의) 계산 장부","keep it on my tab = 내 장부에 달아둬"]]},
+{lv:3,en:"I'm easy — you order for us.",kr:"난 아무거나 다 좋아 — 네가 시켜줘.",sit:"메뉴 결정권 넘기기",tip:"I'm easy = 까다롭지 않아. 쿨한 위임의 표현.",w:[["easy","까다롭지 않은","easygoing = 무던한 성격"]]},
+{lv:3,en:"Morning coffee just hits different.",kr:"아침 커피는 진짜 느낌이 달라.",sit:"모닝커피 예찬",tip:"hits different = 유독 더 좋게 와닿다(슬랭). 곡 얘기에도 그대로!",w:[["hit different","다르게 와닿다 (슬랭)","first sip = 첫 모금"]]}
+);
+CAT_SMALLTALK.sentences.push(
+{lv:1,en:"How's your day going so far?",kr:"오늘 하루 어떻게 보내고 있어요?",sit:"낮 시간 인사",tip:"so far = 지금까지. 하루 중간에 딱 맞는 인사.",w:[["so far","지금까지","So far so good! = 아직까진 좋아"]]},
+{lv:1,en:"Busy day, huh?",kr:"오늘 바쁘시죠?",sit:"직원·동료에게 가볍게",tip:"huh?를 붙이면 혼잣말 같은 부드러운 말 걸기가 돼요.",w:[["huh?","그치?, 그렇죠?","가벼운 동의 유도"]]},
+{lv:1,en:"Don't work too hard!",kr:"너무 무리하지 마세요!",sit:"헤어질 때 덕담",tip:"직장인들 사이 국민 작별 인사. 웃으며 툭.",w:[["work too hard","과로하다","Take it easy!도 비슷한 인사"]]},
+{lv:2,en:"Any fun plans coming up?",kr:"조만간 재밌는 계획 있어요?",sit:"만능 스몰토크 질문",tip:"coming up = 다가오는. 주말·휴가 어디든 통하는 질문.",w:[["coming up","다가오는","What's coming up? = 뭐가 예정돼 있어?"]]},
+{lv:2,en:"How did it go?",kr:"그거 어떻게 됐어?",sit:"지난 일 후속 질문",tip:"면접·공연·소개팅… 뭐든 물을 수 있는 마법의 4단어. 기억했다가 물어봐주면 호감도 급상승!",w:[["go","(일이) 진행되다","It went well! = 잘 됐어!"]]},
+{lv:2,en:"Oh, that reminds me —",kr:"아 맞다, 그러고 보니 생각났는데 —",sit:"화제 전환 연결어",tip:"대화를 자연스럽게 잇는 접착제. remind = 상기시키다.",w:[["remind","생각나게 하다","Remind me to ~ = ~하라고 알려줘"]]},
+{lv:2,en:"Speaking of which, how's the new job?",kr:"말 나온 김에, 새 직장은 어때?",sit:"화제 이어가기",tip:"speaking of which = 말 나온 김에. 대화 고수의 연결어.",w:[["speaking of which","말 나온 김에","speaking of + 명사로도"]]},
+{lv:2,en:"Wait, where was I?",kr:"잠깐, 내가 어디까지 얘기했더라?",sit:"삼천포에서 복귀",tip:"이야기가 샜다가 돌아올 때. Where were we?는 '우리' 버전.",w:[["Where was I?","어디까지 말했지?","이야기의 북마크"]]},
+{lv:3,en:"Not to change the subject, but did you see the news?",kr:"얘기 돌리려는 건 아닌데, 그 뉴스 봤어?",sit:"화제 전환 쿠션",tip:"'~하려는 건 아닌데'라고 말하면서 하는 게 포인트. 유용한 완충재.",w:[["change the subject","화제를 바꾸다","Don't change the subject! = 말 돌리지 마!"]]},
+{lv:3,en:"I'll leave you to it.",kr:"하시던 거 마저 하세요. (전 이만)",sit:"바쁜 사람 놓아주기",tip:"it = 상대가 하던 일. 배려 있는 퇴장의 정석.",w:[["leave A to B","A가 B를 하게 두다","I'll leave you two alone. = 둘이 얘기해 (자리 비켜줌)"]]}
+);
+CAT_REACTION.sentences.push(
+{lv:1,en:"No pressure.",kr:"부담 갖지 마.",sit:"부탁하면서 배려",tip:"부탁 뒤에 붙이면 상대 마음이 가벼워져요. 반어로 놀릴 때도!",w:[["pressure","부담, 압박","No rush, no pressure."]]},
+{lv:1,en:"You got this.",kr:"넌 할 수 있어. 이건 네 거야.",sit:"도전 직전 응원",tip:"시험장·무대 앞 국민 응원 문구. You've got this도 동일.",w:[["got this","해낼 수 있다","I got this. = 내가 처리할게"]]},
+{lv:2,en:"Well deserved.",kr:"충분히 그럴 자격 있어.",sit:"성취 축하",tip:"deserve(자격 있다)의 축하 버전. 승진·수상 축하에 딱 두 단어.",w:[["deserved","마땅한","You earned it. = 네가 노력해서 얻은 거야"]]},
+{lv:2,en:"Fingers crossed!",kr:"행운을 빌게! (제발 잘되길)",sit:"결과 기다릴 때",tip:"검지+중지를 꼬는 제스처와 세트. 행운 기원의 국제 공용어.",w:[["cross one's fingers","행운을 빌다","Keeping my fingers crossed for you!"]]},
+{lv:2,en:"That's on me.",kr:"그건 내 잘못이야. 내 책임.",sit:"쿨한 책임 인정",tip:"my bad보다 진지하게 책임을 인정하는 표현. 참고로 식당에서 쓰면 '내가 살게'!",w:[["on me","내 책임인; 내가 내는","다의어 상황 — 문맥이 결정"]]},
+{lv:2,en:"Come again?",kr:"뭐라고요? 다시 말해줄래요?",sit:"못 들었을 때",tip:"Pardon?보다 캐주얼한 '다시요?'. 놀라서 되물을 때도.",w:[["Come again?","다시 말해줘","Sorry, say that again?도 OK"]]},
+{lv:2,en:"You never know.",kr:"그건 모르는 일이지.",sit:"가능성 열어두기",tip:"희망을 접는 사람에게 툭 건네는 세 단어. 가사에도 자주.",w:[["never know","알 수 없다","You never know until you try."]]},
+{lv:2,en:"We'll see.",kr:"두고 보면 알겠지.",sit:"판단 보류",tip:"확답을 피하는 어른의 기술. 부모님이 제일 잘 쓰는 말 ㅋㅋ",w:[["We'll see","두고 보자","확률 반반의 뉘앙스"]]},
+{lv:3,en:"Don't get your hopes up.",kr:"너무 기대하지는 마.",sit:"기대치 조절",tip:"hopes up = 부푼 기대. 실망 방지 예방주사.",w:[["get one's hopes up","기대에 부풀다","I got my hopes up for nothing. = 괜히 기대했네"]]},
+{lv:3,en:"I wouldn't miss it for the world.",kr:"무슨 일이 있어도 꼭 갈게.",sit:"초대에 최고의 답",tip:"'세상을 준대도 안 놓친다' — 초대한 사람을 감동시키는 수락.",w:[["for the world","무슨 일이 있어도 (부정문에서)","not for the world = 절대로"]]}
+);
+CAT_FRIENDS.sentences.push(
+{lv:1,en:"Come over!",kr:"우리 집으로 와!",sit:"즉흥 초대",tip:"come over = (내가 있는 곳으로) 오다. 놀러와의 두 단어.",w:[["come over","놀러 오다","Come over whenever. = 아무 때나 와"]]},
+{lv:1,en:"Text me the details.",kr:"자세한 건 문자로 보내줘.",sit:"약속 정리",w:[["details","세부 사항","deets라고 줄이면 더 힙하게 (슬랭)"]]},
+{lv:1,en:"I'm outside.",kr:"나 밖이야. 나와.",sit:"픽업 도착 문자",tip:"두 단어로 끝나는 도착 알림. 벨 대신 문자가 국룰.",w:[["outside","밖에","I'm out front. = 앞에 있어"]]},
+{lv:2,en:"You always say that.",kr:"넌 맨날 그 소리야.",sit:"장난 타박",tip:"'다이어트는 내일부터' 같은 말에 날리는 츳코미.",w:[["always","맨날, 항상","놀림 포인트는 always에 강세"]]},
+{lv:2,en:"First round's on me.",kr:"첫 잔은 내가 쏜다.",sit:"술자리 시작",tip:"round = 모두에게 한 잔씩. 우정 충전 멘트.",w:[["round","(전원) 한 잔씩","Next round's yours! = 다음 잔은 네 차례"]]},
+{lv:2,en:"Are you seeing this?!",kr:"야 이거 보고 있어?! 실화냐?!",sit:"눈앞의 충격 공유",tip:"믿기 힘든 장면을 함께 볼 때. 현재진행형이 현장감을 살려요.",w:[["see","보다","Did you see that?! = 방금 봤어?!"]]},
+{lv:2,en:"Don't wait on me — start without me.",kr:"나 기다리지 말고 먼저 시작해.",sit:"늦을 때 배려",tip:"wait on = 기다리다(구어). 밥·게임·영화 뭐든.",w:[["start without ~","~ 빼고 시작하다","Save me a slice though! = 그래도 한 조각은 남겨줘"]]},
+{lv:3,en:"Real talk — are you doing okay?",kr:"진지하게 묻는 건데 — 너 괜찮아?",sit:"장난 끄고 진심 모드",tip:"real talk = 진지 모드 선언(힙합 유래). 농담 끝 진심의 신호탄.",w:[["real talk","진지하게 말하면 (슬랭)","랩 가사 단골 표현"]]},
+{lv:3,en:"Ten bucks says he's late again.",kr:"걔 또 늦는다에 만 원 건다.",sit:"장난 내기",tip:"Ten bucks says ~ = ~에 10달러 건다. 예언 놀이의 문형.",w:[["bucks","달러 (슬랭)","a buck = 1달러"]]},
+{lv:3,en:"It wouldn't be the same without you.",kr:"네가 없으면 그 맛이 안 나지.",sit:"꼭 오라는 초대",tip:"빠지려는 친구를 붙잡는 최고의 문장. 진심 어린 소속감의 표현.",w:[["the same","똑같은 것","가사에도 자주 — nothing's the same"]]}
+);
+CAT_LOVE.sentences.push(
+{lv:1,en:"Come here.",kr:"이리 와.",sit:"다정한 두 단어",tip:"위로할 때, 안아줄 때. 톤이 전부인 두 단어.",w:[["come here","이리 와","c'mere로 뭉개져 발음돼요"]]},
+{lv:1,en:"Stay a little longer.",kr:"조금만 더 있다 가.",sit:"헤어지기 아쉬울 때",tip:"a little longer = 조금만 더. 노래 제목으로도 수없이 쓰인 문장.",w:[["stay","머물다","가사 최다 출연 동사 중 하나"]]},
+{lv:1,en:"Did you get home safe?",kr:"집에 잘 들어갔어?",sit:"데이트 후 확인 문자",tip:"밤 데이트 후 국룰 문자. 관심의 온도가 전해지는 질문.",w:[["get home","집에 도착하다","Home safe? 두 단어로도 OK"]]},
+{lv:2,en:"I like you. Like, like-like you.",kr:"나 너 좋아해. 그… 진짜 '좋아해' 말이야.",sit:"우정 아닌 사랑 고백",tip:"like-like = 친구로서 말고 이성으로 좋아한다는 뜻. 귀여운 강조 화법.",w:[["like-like","(연애 감정으로) 좋아하다","10대부터 어른까지 다 쓰는 표현"]]},
+{lv:2,en:"I can't stay mad at you.",kr:"너한텐 오래 화를 못 내겠어.",sit:"화해의 순간",tip:"stay mad = 화난 상태를 유지하다. 항복 선언이자 애정 고백.",w:[["stay + 형용사","~한 상태로 있다","stay strong, stay close"]]},
+{lv:2,en:"You're the first person I wanted to tell.",kr:"이 소식, 제일 먼저 너한테 말하고 싶었어.",sit:"좋은 소식 공유",tip:"'첫 번째로 떠오른 사람이 너'라는 게 포인트. 은근하고 강력한 고백.",w:[["the first person","첫 번째 사람","my first call = 제일 먼저 전화할 사람"]]},
+{lv:2,en:"Stop looking at me like that.",kr:"그런 눈으로 보지 마. (심장 떨리니까)",sit:"설레는 견제",tip:"진짜 하지 말라는 게 아니라는 게 함정. 밀당의 세 단어.",w:[["like that","그런 식으로","look at ~ that way도 동일"]]},
+{lv:3,en:"I sleep better when you're around.",kr:"네가 곁에 있으면 잠이 더 잘 와.",sit:"편안함의 고백",tip:"be around = 곁에 있다. 자극적이지 않아서 더 깊은 고백 — 가사로도 최고.",w:[["around","곁에 있는","when you're around — 팝송 단골 구절"]]},
+{lv:3,en:"We should stop meeting like this.",kr:"우리 이렇게 자꾸 마주치면 안 되는데요? (설렘)",sit:"자꾸 마주치는 사이",tip:"자주 마주칠 때 던지는 클래식한 플러팅. 영화 대사 톤으로.",w:[["like this","이런 식으로","살짝 웃으면서 말하는 게 포인트"]]},
+{lv:3,en:"It's always been you.",kr:"처음부터 지금까지, 늘 너였어.",sit:"돌고 돌아 최종 고백",tip:"현재완료가 만드는 '쭉 그래왔다'는 시간의 깊이. 러브송 최후의 한 줄.",w:[["always been","줄곧 ~였다","It was always you.와 쌍벽"]]}
+);
+CAT_DAILY.sentences.push(
+{lv:1,en:"I'm on it.",kr:"바로 할게. 맡겨줘.",sit:"일 받자마자",tip:"on it = 이미 착수했다는 든든한 세 단어.",w:[["be on it","처리 중이다","Get on it! = 빨리 착수해!"]]},
+{lv:1,en:"Give me a sec.",kr:"잠깐만.",sit:"잠깐 대기 요청",tip:"sec = second. one sec, just a sec 전부 OK.",w:[["a sec","잠깐","Hold on a sec."]]},
+{lv:1,en:"I'm not a morning person.",kr:"나 아침형 인간이 아니야.",sit:"아침 컨디션 해명",tip:"~person = ~을 좋아하는 사람. dog person, coffee person으로 무한 응용.",w:[["morning person","아침형 인간","night owl = 올빼미형"]]},
+{lv:2,en:"It's on my list.",kr:"할 일 목록엔 있어. (언젠간 해…)",sit:"미룬 일 변명",tip:"to-do list에 있긴 하다는 귀여운 방어. 뉘앙스는 '아직 안 함'.",w:[["list","목록","bucket list = 죽기 전 할 일 목록"]]},
+{lv:2,en:"I'll figure it out.",kr:"어떻게든 방법을 찾아볼게.",sit:"막막해도 의지 표명",tip:"figure out = 알아내다. 어른의 문제 해결 선언.",w:[["figure out","알아내다, 해결하다","I can't figure him out. = 걔 속을 모르겠어"]]},
+{lv:2,en:"Don't remind me.",kr:"아, 그 얘기 꺼내지 마. (떠올리기 싫어)",sit:"아픈 기억 소환 방어",tip:"직역 '상기시키지 마' — 시험, 흑역사, 마감 앞에서.",w:[["remind","상기시키다","웃픈 뉘앙스로 자주 씀"]]},
+{lv:2,en:"I could use a break.",kr:"나 좀 쉬어야 할 것 같아.",sit:"휴식 필요 신호",tip:"could use = ~가 필요하다(간절). I could use a coffee/hand/hug.",w:[["could use","~이 절실하다","I could use some help. = 도움이 필요해"]]},
+{lv:2,en:"Let's get this over with.",kr:"후딱 해치워버리자.",sit:"하기 싫은 일 앞에서",tip:"get ~ over with = 빨리 끝내버리다. 병원·과제·설거지 만능.",w:[["get it over with","해치우다","over = 끝난"]]},
+{lv:2,en:"One thing at a time.",kr:"한 번에 하나씩 하자.",sit:"멘붕 진정시키기",tip:"멀티태스킹 붕괴 직전의 주문. baby steps와 세트.",w:[["at a time","한 번에 ~씩","one day at a time — 가사 단골"]]},
+{lv:3,en:"That's a problem for future me.",kr:"그건 미래의 내가 해결할 문제야.",sit:"유쾌한 현실 도피",tip:"future me = 미래의 나. 밈에서 시작해 일상어가 된 유머.",w:[["future me","미래의 나","past me = 과거의 나 (원망 대상)"]]}
+);
+CAT_TRAVEL.sentences.push(
+{lv:1,en:"We're here!",kr:"도착했다!",sit:"도착의 환호",w:[["here","여기, 도착","Finally! 와 세트로"]]},
+{lv:1,en:"Buckle up.",kr:"벨트 매.",sit:"출발 직전",tip:"buckle = 버클을 채우다. '각오해'라는 비유로도 써요!",w:[["buckle up","안전벨트를 매다","비유: Buckle up, it's gonna be a long night."]]},
+{lv:1,en:"How much further?",kr:"얼마나 더 가야 해?",sit:"이동 중 단골 질문",tip:"further = 거리가 더. Are we there yet?의 사촌.",w:[["further","(거리가) 더","farther와 혼용"]]},
+{lv:1,en:"We made it!",kr:"드디어 왔다! 해냈다!",sit:"긴 여정의 끝",tip:"make it = 도착하다·해내다. 공항 라스트런 성공 후의 환호.",w:[["make it","해내다, 도착하다","We made it in time! = 시간 안에 왔어!"]]},
+{lv:2,en:"Let's leave early and beat the traffic.",kr:"일찍 나가서 차 막히기 전에 가자.",sit:"출발 전략",tip:"beat = 이기다 → 앞지르다. beat the rush, beat the crowd.",w:[["beat the traffic","정체를 피하다","beat의 다의어 활용 — 비트!"]]},
+{lv:2,en:"Could you scoot over a little?",kr:"조금만 안쪽으로 가주실래요?",sit:"자리 좁힐 때",tip:"scoot = 미끄러지듯 옮기다. 벤치·차 뒷좌석에서 필수.",w:[["scoot over","옆으로 당겨 앉다","Scooch over라고도 해요"]]},
+{lv:2,en:"I'm getting carsick.",kr:"나 멀미 나기 시작했어.",sit:"이동 중 SOS",tip:"carsick, seasick, airsick — 탈것별로 단어가 있어요.",w:[["carsick","차멀미 나는","motion sickness = 멀미 (총칭)"]]},
+{lv:2,en:"Let's stretch our legs.",kr:"내려서 다리 좀 펴자.",sit:"휴게소 정차",tip:"stretch one's legs = 잠깐 걷다. 장거리 운전의 공식 멘트.",w:[["stretch","펴다, 스트레칭하다","stretch break = 스트레칭 휴식"]]},
+{lv:3,en:"Gas, snacks, playlist — we're all set.",kr:"기름, 간식, 플레이리스트 — 준비 끝.",sit:"출발 체크리스트",tip:"all set = 준비 완료. 명사 나열 리듬이 노래 가사 같죠.",w:[["all set","준비된","You're all set. = (계산·수속) 다 됐습니다"]]},
+{lv:3,en:"Getting lost is half the adventure.",kr:"길 잃는 것도 모험의 절반이지.",sit:"길 잃고 정신승리",tip:"half the ~ = ~의 절반. 여행 철학이자 인생 가사.",w:[["get lost","길을 잃다","Get lost!는 '꺼져' — 문맥 조심!"]]}
+);
+CAT_IDIOMS.sentences.push(
+{lv:2,en:"Let me break the ice.",kr:"내가 어색한 분위기 좀 풀어볼게.",sit:"첫 만남의 어색함",tip:"얼음(어색함)을 깨다. icebreaker = 아이스브레이킹 게임.",w:[["break the ice","어색함을 깨다","ice = 얼어붙은 분위기"]]},
+{lv:2,en:"It's not rocket science.",kr:"뭐 그렇게 어려운 것도 아니야.",sit:"과대평가 진정",tip:"로켓 과학이 아니다 = 누구나 할 수 있다. 격려이자 츳코미.",w:[["rocket science","고난도의 일","brain surgery로 바꿔도 동일"]]},
+{lv:2,en:"Let's get the ball rolling.",kr:"자, 일단 시작해 보자.",sit:"프로젝트 개시",tip:"공을 굴리기 시작하다 = 일에 시동을 걸다.",w:[["get the ball rolling","시작하다","keep the ball rolling = 계속 굴러가게 하다"]]},
+{lv:2,en:"Are we on the same page?",kr:"우리 지금 같은 생각인 거지?",sit:"이해 일치 확인",tip:"같은 페이지를 보고 있다 = 같은 이해·방향. 회의 필수 표현.",w:[["on the same page","생각이 일치하는","get everyone on the same page"]]},
+{lv:2,en:"Let's call it even.",kr:"우리 퉁친 걸로 하자.",sit:"빚·신세 정산",tip:"even = 대등한. 서로 갚을 것 없이 0:0으로 만들기.",w:[["call it even","비긴 걸로 하다","We're even. = 이제 퉁이야"]]},
+{lv:2,en:"You get the best of both worlds.",kr:"두 마리 토끼를 다 잡는 거지.",sit:"양쪽 장점 취하기",tip:"두 세계의 최고만 갖는다. 노래 제목으로도 유명!",w:[["the best of both worlds","일석이조","반대는 the worst of both worlds"]]},
+{lv:3,en:"Take it with a grain of salt.",kr:"그 말은 걸러서 들어.",sit:"소문·후기 필터링",tip:"소금 한 톨과 함께 삼켜라 = 100% 믿지 마라. 인터넷 시대 필수 관용구.",w:[["a grain of salt","반신반의","a pinch of salt (영국식)"]]},
+{lv:3,en:"We hit the ground running.",kr:"우린 시작하자마자 풀스피드로 달렸어.",sit:"빠른 착수 자랑",tip:"착지하자마자 달리다 — 적응 기간 없이 바로 성과 내기.",w:[["hit the ground running","시작부터 전력으로","이직·새 프로젝트 단골"]]},
+{lv:3,en:"Keep it under the radar for now.",kr:"당분간은 조용히 진행하자.",sit:"비공개 진행",tip:"레이더 아래로 = 눈에 안 띄게. 발매 전 프로젝트에도 딱.",w:[["under the radar","눈에 띄지 않게","fly under the radar로도"]]},
+{lv:3,en:"That's the rule of thumb.",kr:"보통 그게 기본 원칙이야.",sit:"경험칙 공유",tip:"엄지 규칙 = 정밀하진 않지만 대체로 맞는 실전 법칙.",w:[["rule of thumb","경험상의 법칙","as a rule of thumb으로 문장 시작"]]}
+);
+CAT_STUDIO.sentences.push(
+{lv:2,en:"Let's track the vocals tomorrow.",kr:"보컬 녹음은 내일 하자.",sit:"세션 일정",tip:"track = 녹음하다(동사). tracking day = 녹음 날.",w:[["track","녹음하다 (동사)","다의어 — 곡, 흔적, 추적하다"]]},
+{lv:2,en:"Pan the guitars left and right.",kr:"기타 두 트랙, 좌우로 패닝해 줘.",sit:"스테레오 배치",tip:"pan = 소리를 좌우 공간에 배치하다. 더블 기타의 정석 세팅.",w:[["pan","패닝하다","panorama에서 온 말"]]},
+{lv:2,en:"Count me in.",kr:"카운트 주고 시작해 줘. (그리고 '나도 껴줘'!)",sit:"녹음 시작 신호",tip:"스튜디오에선 '카운트인 해줘', 일상에선 '나도 낄래' — 다의어 재미.",w:[["count-in","시작 전 카운트","one, two, three, four!"]]},
+{lv:2,en:"That chord change gives me chills.",kr:"이 코드 전개, 소름 돋아.",sit:"코드에 감동했을 때",tip:"give chills = 소름 돋게 하다. 최고의 음악 칭찬.",w:[["chills","소름, 전율","I got chills. = 소름 돋았어"]]},
+{lv:2,en:"Let's cut the second pre-chorus.",kr:"두 번째 프리코러스는 잘라내자.",sit:"곡 구성 다이어트",tip:"cut = 삭제하다. 요즘 팝은 짧게 — 편집의 미학.",w:[["cut","잘라내다","다의어 — 곡 자체를 a cut이라고도!"]]},
+{lv:2,en:"Don't overthink it — just press record.",kr:"너무 재지 말고, 일단 녹음 버튼 눌러.",sit:"완벽주의 탈출",tip:"overthink = 과하게 생각하다. 창작자에게 필요한 한 마디.",w:[["overthink","과하게 고민하다","over- 시리즈의 대표"]]},
+{lv:3,en:"The vocal sits nicely in the mix now.",kr:"이제 보컬이 믹스에 착 앉았네.",sit:"밸런스 완성",tip:"sit = (소리가) 자리 잡다. 믹싱 엔지니어의 언어.",w:[["sit in the mix","믹스에 어우러지다","sit on top = 위에 뜨다"]]},
+{lv:3,en:"Let's automate the volume through the bridge.",kr:"브릿지 구간은 볼륨 오토메이션 걸자.",sit:"다이내믹 설계",w:[["automate","자동화하다","automation = DAW의 꽃"]]},
+{lv:3,en:"The mix needs more air on top.",kr:"믹스 고역대에 공기감이 더 필요해.",sit:"고역 표현",tip:"air = 초고역의 개방감. 소리를 형용하는 시적 은유.",w:[["air","공기감 (초고역)","airy = 공기감 있는"]]},
+{lv:3,en:"We'll fix it in the mix.",kr:"그건 믹스에서 고치지 뭐. (하하)",sit:"스튜디오 전설의 농담",tip:"녹음 대충 하고 후반에 살리자는 반농담 — 업계인이라면 다 아는 밈.",w:[["fix it in the mix","믹스에서 수습하기","라임까지 완벽한 관용구"]]}
+);
+CAT_STAGE.sentences.push(
+{lv:1,en:"How's everybody feeling tonight?!",kr:"오늘 밤 다들 기분 어때요?!",sit:"공연 오프닝 멘트",tip:"공연 시작의 국제 표준 멘트. 함성으로 대답받는 질문.",w:[["everybody","여러분 모두","crowd work의 시작"]]},
+{lv:1,en:"Give it up for the band!",kr:"밴드에게 큰 박수 부탁드려요!",sit:"멤버 소개 멘트",tip:"give it up for ~ = ~에게 박수를! 공연 필수 관용구.",w:[["give it up for","~에게 박수를","Put your hands together for ~도 동일"]]},
+{lv:1,en:"Put your hands up!",kr:"손 들어!",sit:"떼창 타임",w:[["hands up","손을 위로","Hands in the air!도 같은 뜻"]]},
+{lv:1,en:"This next one is a brand new song.",kr:"다음 곡은 완전 신곡이에요.",sit:"신곡 첫 공개",tip:"brand new = 갓 나온. 신곡 공개의 설렘 멘트.",w:[["brand new","완전 새것인","brand는 강조"]]},
+{lv:2,en:"We wrote this one on the road.",kr:"이 곡은 투어 다니면서 쓴 곡이에요.",sit:"곡 비하인드 멘트",tip:"on the road = 투어 중. 로드 라이프의 낭만.",w:[["on the road","투어 중인","road trip과 연결되는 무드"]]},
+{lv:2,en:"We're gonna slow things down for a minute.",kr:"잠시 분위기를 좀 가라앉혀 볼게요.",sit:"발라드 전환 멘트",tip:"슬로우 넘버 들어가기 전 국룰 멘트. 조명도 같이 어두워지죠.",w:[["slow down","느리게 하다","분위기 전환의 신호"]]},
+{lv:2,en:"This one goes out to everyone chasing a dream.",kr:"이 곡은 꿈을 좇는 모든 분들께 바칩니다.",sit:"곡 헌정 멘트",tip:"go out to ~ = ~에게 바치다. 라디오 DJ부터 무대까지.",w:[["go out to","~에게 바쳐지다","dedication의 구어체"]]},
+{lv:2,en:"You sound beautiful tonight.",kr:"오늘 여러분 목소리 정말 아름답네요. (떼창 칭찬)",sit:"떼창 직후",tip:"관객의 떼창을 '노래'로 인정해 주는 최고의 멘트.",w:[["sound + 형용사","~하게 들리다","You sound amazing!"]]},
+{lv:3,en:"No phones for this one — just be here with us.",kr:"이 곡만큼은 폰 내려놓고, 지금 이 순간에 함께해요.",sit:"몰입 요청 멘트",tip:"요즘 아티스트들이 실제로 하는 멘트. be here = 현존하다.",w:[["be here","(마음까지) 여기 있다","be present와 같은 뜻"]]},
+{lv:3,en:"That crowd carried us tonight.",kr:"오늘은 관객이 우릴 업고 갔어.",sit:"공연 후 소감",tip:"carry = 떠받치다·하드캐리하다. 게임 용어로도 익숙하죠!",w:[["carry","하드캐리하다","The vocals carry the song. = 보컬이 곡을 살린다"]]}
+);
+
 const CATS=[CAT_CAFE,CAT_SMALLTALK,CAT_REACTION,CAT_FRIENDS,CAT_LOVE,CAT_DAILY,CAT_TRAVEL,CAT_IDIOMS,CAT_STUDIO,CAT_STAGE];
 
 /* ---------- 작사 노트 ---------- */
@@ -957,6 +1081,207 @@ const LYRIC = [
   ]
 }
 ];
+
+/* ===== 작사 노트: 다의어 +50 ===== */
+LYRIC_POLY_ADD = [
+{w:"tear",meanings:["눈물 (티어)","찢다 (테어)"],ex:"I tear the letter, but the tears won't stop.",exkr:"편지를 찢어도, 눈물은 멈추질 않아",rhyme:"tear(눈물) – near, disappear / tear(찢다) – air, care",note:"철자는 같은데 발음이 두 개! 눈물은 '티어', 찢다는 '테어'. 한 줄에 겹치면 고급 워드플레이."},
+{w:"lie",meanings:["눕다","거짓말; 거짓말하다"],ex:"I lie awake, counting all your lies.",exkr:"잠들지 못하고 누워, 네 거짓말들을 세고 있어",rhyme:"lie – night, goodbye(슬랜트), why",note:"lie awake(뜬눈으로 눕다)와 lies(거짓말)를 한 문장에 — 불면과 배신의 이중 노출."},
+{w:"left",meanings:["왼쪽","떠났다 (leave의 과거)","남겨진 (be left)"],ex:"You left, and there's nothing left of us.",exkr:"네가 떠나고, 우리에겐 남은 게 아무것도 없어",rhyme:"left – kept, regret(슬랜트)",note:"'떠났다'와 '남았다'가 같은 단어라는 아이러니. 이별 가사 최고의 재료."},
+{w:"mine",meanings:["내 것","광산","지뢰 (landmine)"],ex:"You were mine; now every memory's a landmine.",exkr:"넌 내 거였는데, 이젠 모든 기억이 지뢰밭이야",rhyme:"mine – time, line, shine",note:"소유의 달콤함과 지뢰의 위험함 — 관계의 양면을 한 단어로."},
+{w:"present",meanings:["현재","선물","참석한, 곁에 있는"],ex:"The present was your presence — the only present I needed.",exkr:"현재는 곧 네 존재였고, 그게 내가 원한 유일한 선물이었어",rhyme:"present – meant, sent",note:"현재=선물이라는 명언 구조를 그대로 가사로. presence(존재)와의 발음 장난도 가능."},
+{w:"wave",meanings:["파도","손 흔들기","(sound wave) 음파"],ex:"One last wave before the waves took you away.",exkr:"파도가 널 데려가기 전, 마지막으로 흔든 손",rhyme:"wave – save, brave, gave",note:"작별 인사와 파도의 겹침 — 바다 이별 가사의 정석 장치."},
+{w:"rock",meanings:["바위","흔들다; 달래다","록 음악"],ex:"You rock me steady, solid as a rock.",exkr:"넌 바위처럼 단단하게, 날 흔들리지 않게 안아줘",rhyme:"rock – clock, block, shock",note:"rock steady = 흔들림 없이. '흔들다'가 '안정'이 되는 역설이 매력."},
+{w:"beat",meanings:["비트, 박자","이기다","(dead beat) 지친"],ex:"The beat goes on, but baby, I'm dead beat.",exkr:"비트는 계속되는데, 난 완전히 지쳐버렸어",rhyme:"beat – street, repeat, heartbeat",note:"뮤지션의 단어. my heart skipped a beat = 심장이 한 박자를 놓쳤다(설렘)도 활용."},
+{w:"note",meanings:["음(音)","메모, 쪽지","주목하다"],ex:"I hid a note in every note I sang.",exkr:"내가 부른 모든 음마다 쪽지를 숨겨뒀어",rhyme:"note – wrote, throat, quote",note:"악보의 음과 손편지의 겹침 — 싱어송라이터의 자기소개 같은 다의어."},
+{w:"track",meanings:["곡, 트랙","자국, 흔적","추적하다"],ex:"Lost track of time on track sixteen.",exkr:"16번 트랙에서 시간 가는 줄도 몰랐지",rhyme:"track – back, black",note:"lose track of = ~을 놓치다. 앨범 트랙과 시간의 흔적을 오가는 단어."},
+{w:"bar",meanings:["(음악) 마디","술집","(bars) 랩 가사","철창"],ex:"Writing bars at the bar till they lock the doors.",exkr:"문 닫을 때까지 술집에서 가사를 쓰고 있어",rhyme:"bar – far, star, scar",note:"힙합에서 bars = 잘 쓴 랩 가사. 마디·술집·가사 삼중 활용 가능한 뮤지션 단어."},
+{w:"pitch",meanings:["음정","(아이디어를) 제안하다","던지다"],ex:"My pitch was perfect, but you pitched my heart away.",exkr:"내 음정은 완벽했는데, 넌 내 마음을 던져버렸어",rhyme:"pitch – switch, rich",note:"perfect pitch = 절대음감. 음악과 비즈니스(피칭)를 오가는 단어."},
+{w:"scale",meanings:["음계","저울","규모"],ex:"I practice scales and weigh us on a scale.",exkr:"음계를 연습하며, 우리 사이를 저울에 달아봐",rhyme:"scale – fail, pale, exhale",note:"연습(음계)과 파단(저울) — 뮤지션의 일상과 마음을 동시에."},
+{w:"bridge",meanings:["다리","(곡의) 브릿지","(기타) 브릿지"],ex:"Meet me at the bridge — the song's, or the city's.",exkr:"브릿지에서 만나 — 노래의 브릿지든, 도시의 다리든",rhyme:"bridge – ridge, midge(희귀 — 행 중간 활용 추천)",note:"burn bridges(관계를 끊다)와도 연결 — 곡 구성과 관계를 잇는 단어."},
+{w:"record",meanings:["음반 (레코드)","기록","녹음하다 (리코드)"],ex:"For the record, you broke the record for breaking hearts.",exkr:"분명히 말해두는데, 넌 마음 부수기 신기록을 세웠어",rhyme:"record – word(슬랜트), forward(슬랜트)",note:"for the record = 분명히 말해두자면. 명사(레코드)와 동사(리코드)의 강세 차이도 재미."},
+{w:"ring",meanings:["반지","울리다","(전화를) 걸다"],ex:"The ring you never gave still rings in my head.",exkr:"네가 끝내 주지 않은 반지가, 아직 머릿속에서 울려",rhyme:"ring – sing, bring, everything",note:"프러포즈와 이명(耳鳴)의 겹침. give me a ring = 전화해 줘 (반지 아님 주의!)."},
+{w:"spring",meanings:["봄","용수철","샘; 샘솟다"],ex:"Love springs back every spring.",exkr:"봄이 올 때마다, 사랑은 용수철처럼 되살아나",rhyme:"spring – sing, bring, king",note:"계절·탄성·수원(水源) — 회복과 재생의 삼중 이미지."},
+{w:"star",meanings:["별","스타","주연을 맡다"],ex:"You star in every dream, my faraway star.",exkr:"넌 내 모든 꿈에 주연으로 나와, 저 멀리 있는 별아",rhyme:"star – far, are, scar, guitar",note:"star/scar/guitar 라임 세트는 발라드의 보물. starring = 주연의."},
+{w:"space",meanings:["우주","공간","(관계의) 거리"],ex:"You asked for space, so I gave you the universe.",exkr:"네가 거리를 원해서, 난 우주만큼 멀어져 줬어",rhyme:"space – place, face, trace",note:"I need space = 거리가 필요해 (이별 신호). 우주 스케일로 과장하면 가사가 돼요."},
+{w:"time",meanings:["시간","박자 (keep time)","횟수"],ex:"Keep time with my heart one more time.",exkr:"한 번만 더, 내 심장에 박자를 맞춰줘",rhyme:"time – mine, line, rhyme",note:"keep time = 박자를 지키다. 드러머와 연인에게 동시에 하는 부탁."},
+{w:"watch",meanings:["보다","시계","경계, 불침번"],ex:"I watch the watch — you're late again, love.",exkr:"시계만 바라보고 있어 — 너 또 늦는구나",rhyme:"watch – clock(슬랜트)",note:"기다림의 정서를 두 개의 watch로. night watch = 밤샘 경계."},
+{w:"second",meanings:["초(秒)","두 번째","찬성하다"],ex:"Every second with you never felt second-best.",exkr:"너와의 매 순간은 한 번도 두 번째인 적 없었어",rhyme:"second – reckoned, beckoned",note:"second thoughts = 망설임, second chance = 재회 — 이별·재회 가사의 축."},
+{w:"match",meanings:["성냥","어울리다; 맞먹다","경기"],ex:"We match like a match and gasoline.",exkr:"우린 성냥과 휘발유처럼 잘 맞아 (위험하게도)",rhyme:"match – catch, attach",note:"잘 어울림(match)과 불붙는 위험(match)의 이중성 — 파국형 러브송 필수."},
+{w:"spell",meanings:["주문, 마법","철자를 말하다","잠깐의 기간"],ex:"You spell trouble, and I'm under your spell.",exkr:"넌 누가 봐도 트러블인데, 난 네 마법에 걸려버렸어",rhyme:"spell – well, tell, farewell",note:"spell trouble = 문제가 될 징조다. 철자와 주문의 겹침이 고전적 매력."},
+{w:"draw",meanings:["그리다","끌어당기다","무승부"],ex:"You draw me in like the sea draws the shore.",exkr:"바다가 해안을 끌어당기듯, 넌 날 끌어당겨",rhyme:"draw – flaw, raw, more(슬랜트)",note:"drawn to you = 너에게 끌려. 그림과 인력(引力)의 이중 이미지."},
+{w:"wind",meanings:["바람 (윈드)","감다, 구불거리다 (와인드)"],ex:"The wind winds through the streets we used to walk.",exkr:"우리가 걷던 골목 사이로 바람이 굽이쳐 불어",rhyme:"wind(바람) – thinned, sinned / wind(감다) – find, mind",note:"tear처럼 발음이 갈라지는 단어. wind down = 하루를 마무리하다."},
+{w:"bow",meanings:["절 (바우)","활, 리본 (보우)"],ex:"Take a bow, then untie the bow you left on my heart.",exkr:"인사하고 무대를 내려와, 내 마음에 묶어둔 리본은 풀고 가",rhyme:"bow(절) – now, how / bow(리본) – go, show",note:"공연의 커튼콜(take a bow)과 선물 리본 — 무대 위 이별 가사에 딱."},
+{w:"live",meanings:["살다 (리브)","라이브의, 생중계인 (라이브)"],ex:"We only live once, and tonight we're live.",exkr:"인생은 한 번뿐이고, 오늘 밤 우린 라이브야",rhyme:"live(살다) – give, forgive / live(라이브) – drive, alive",note:"뮤지션의 인생 그 자체인 다의어. alive와 세트로 쓰면 상승감."},
+{w:"close",meanings:["가까운 (클로스)","닫다 (클로즈)"],ex:"So close, and yet you close the door.",exkr:"이렇게 가까운데, 넌 문을 닫아버리네",rhyme:"close(가까운) – ghost(슬랜트), most / close(닫다) – goes, knows",note:"가까움과 단절이 한 단어에. so close = 아깝게 놓친."},
+{w:"band",meanings:["밴드","고무줄","무리, 일행"],ex:"Our band was a rubber band — stretched until it snapped.",exkr:"우리 밴드는 고무줄 같았지 — 당기다 결국 끊어졌어",rhyme:"band – hand, stand, understand",note:"밴드 해체 서사를 고무줄로 은유 — 밴드 출신에게 특히 와닿는 장치."},
+{w:"season",meanings:["계절","(방송·인생의) 시즌","양념하다"],ex:"Every season has its reason to leave.",exkr:"모든 계절엔 떠나야 할 저마다의 이유가 있지",rhyme:"season – reason(황금 라임!)",note:"season–reason은 팝 역사상 가장 사랑받는 라임 콤비."},
+{w:"letter",meanings:["편지","글자"],ex:"Every letter of your name reads like a love letter.",exkr:"네 이름의 글자 하나하나가 러브레터처럼 읽혀",rhyme:"letter – better, forever(슬랜트)",note:"글자와 편지의 겹침 + letter/better 라임 — 손편지 감성 필수."},
+{w:"story",meanings:["이야기","(건물의) 층"],ex:"Ten stories up, still telling our story.",exkr:"10층 옥상 위에서, 아직 우리 이야기를 하고 있어",rhyme:"story – glory, for me(슬랜트)",note:"옥상(층)과 서사(이야기)를 한 단어로 — 도시 야경 가사에 딱."},
+{w:"train",meanings:["기차","훈련하다","(드레스) 자락"],ex:"I trained my heart to miss the train you're on.",exkr:"네가 탄 기차를 그리워하도록, 내 마음을 훈련시켰어",rhyme:"train – rain, again, pain",note:"train–rain–again은 이별 발라드의 클래식 라임 트리오."},
+{w:"change",meanings:["변화","잔돈","갈아입다"],ex:"Keep the change; I'll keep the changes you made in me.",exkr:"잔돈은 가져 — 네가 내게 남긴 변화는 내가 가질게",rhyme:"change – strange, rearrange",note:"카페 계산대에서 시작해 인생으로 끝나는 줌아웃 구조."},
+{w:"state",meanings:["상태","주(州)","말하다, 명시하다"],ex:"State of mind, crossing state lines.",exkr:"마음의 상태 그대로, 주 경계선을 넘어가",rhyme:"state – late, fate, wait",note:"state of mind는 힙합·R&B 제목 단골. 로드트립 가사와 최고 궁합."},
+{w:"blow",meanings:["불다","한 방, 타격","망치다 (blow it)"],ex:"One blow of wind, and I blew my one shot.",exkr:"바람 한 번 분 것뿐인데, 난 단 한 번의 기회를 날렸어",rhyme:"blow – go, low, know",note:"blow up(떠오르다)·blow it(망치다) — 성공과 실패가 같은 동사에."},
+{w:"wear",meanings:["입다","닳게 하다 (wear out)","(시간이) 흐르며 지치게 하다"],ex:"I wear your hoodie till it wears me out.",exkr:"네 후드를 입고 또 입다, 결국 내가 다 닳아버려",rhyme:"wear – care, there, disappear(슬랜트)",note:"착용과 소모 — 애착이 상처가 되는 과정을 한 단어로."},
+{w:"roll",meanings:["구르다","(테이프를) 돌리다","명단 (roll call)"],ex:"Let the tape roll, let the good times roll.",exkr:"테이프를 돌려, 좋은 시절도 다시 굴러가게",rhyme:"roll – soul, whole, control",note:"roll–soul–control은 소울 음악의 시그니처 라임 세트."},
+{w:"key",meanings:["열쇠","(음악) 조, 키","핵심적인"],ex:"I wrote it in your key — you were the key all along.",exkr:"네 키에 맞춰 곡을 썼어 — 처음부터 열쇠는 너였으니까",rhyme:"key – me, free, melody",note:"작곡가만 쓸 수 있는 고백 구조. off-key(음이탈)로 흔들림도 표현 가능."},
+{w:"current",meanings:["현재의","해류, 물살","전류"],ex:"Swept away by the current of the current you.",exkr:"지금의 너라는 물살에 그대로 휩쓸려버렸어",rhyme:"current – (행 중간 배치 추천)",note:"시간(현재)과 힘(물살·전류)의 겹침 — 몰입과 감전의 사랑."},
+{w:"charge",meanings:["충전하다","돌진하다","요금","책임 (in charge)"],ex:"Charge my heart, then take charge of the night.",exkr:"내 심장을 충전하고, 오늘 밤은 네가 이끌어줘",rhyme:"charge – large, stars(슬랜트)",note:"배터리 세대의 러브송 동사. in charge = 주도권을 쥔."},
+{w:"cover",meanings:["덮다","커버곡","(잡지) 표지","엄호하다"],ex:"Under the covers, singing covers of our song.",exkr:"이불 속에서, 우리 노래를 커버해 부르고 있어",rhyme:"cover – lover, over(슬랜트)",note:"cover–lover–over — 팝 발라드 3대 라임. 커버곡 문화와도 직결."},
+{w:"single",meanings:["싱글(곡)","미혼의, 솔로인","단 하나의"],ex:"Dropped a single about being single.",exkr:"솔로가 된 얘기로 싱글을 냈어",rhyme:"single – mingle, jingle",note:"발매(싱글)와 연애 상태(싱글)의 완벽한 말장난 — 뮤지션 전용 유머."},
+{w:"flat",meanings:["평평한","(음악) 플랫, 반음 낮은","김빠진","(영국) 아파트"],ex:"My heart sings flat since you left the flat.",exkr:"네가 집을 떠난 뒤로, 내 마음은 반음 낮게 노래해",rhyme:"flat – that, at",note:"음이탈(flat)과 빈집(flat) — 영국식 어휘까지 쓰는 고급 워드플레이."},
+{w:"sharp",meanings:["날카로운","(음악) 샤프, 반음 높은","정각 (8 o'clock sharp)"],ex:"Eight o'clock sharp — your goodbye, still sharp.",exkr:"8시 정각 — 네 작별 인사는 아직도 날카로워",rhyme:"sharp – heart(슬랜트), dark(슬랜트)",note:"flat과 세트. 시간 약속(정각)과 상처(날카로움)를 겹치기."},
+{w:"rest",meanings:["쉬다","(음악) 쉼표","나머지"],ex:"A rest in the melody, then you for the rest of my life.",exkr:"멜로디의 쉼표 하나, 그리고 남은 평생은 너",rhyme:"rest – best, chest, blessed",note:"악보의 쉼표와 여생(the rest) — 프러포즈 가사의 우아한 장치."},
+{w:"minor",meanings:["(음악) 단조","사소한","미성년자"],ex:"A minor key for a major heartbreak.",exkr:"거대한 상심을 담기엔, 단조 하나면 충분해",rhyme:"minor – finer, designer(슬랜트)",note:"A minor(라단조)와 '사소한'의 겹침 — major와 대구를 이루면 완성."},
+{w:"major",meanings:["(음악) 장조","중대한","전공; 메이저 (레이블)"],ex:"We went major, but I miss our minor days.",exkr:"우린 메이저로 갔지만, 마이너 시절이 그리워",rhyme:"major – later(슬랜트), favor(슬랜트)",note:"장조/메이저 레이블/중대함 — 뮤지션 커리어 서사를 한 단어에."},
+{w:"swing",meanings:["흔들리다","(재즈) 스윙","그네","(mood swings) 감정 기복"],ex:"My mood swings swing like a jazz band at midnight.",exkr:"내 감정 기복은 자정의 재즈 밴드처럼 스윙해",rhyme:"swing – ring, sing, everything",note:"감정 기복(mood swings)을 재즈 리듬으로 승화 — 유머와 우수를 동시에."}
+];
+LYRIC.find(l=>l.id==="poly").words.push(...LYRIC_POLY_ADD);
+
+/* ===== 작사 노트: 함축어 & 슬랭 +50 ===== */
+LYRIC_SLANG_ADD = [
+{w:"finna",meanings:["fixing to의 축약 — 막 ~하려고 해 (남부·힙합)"],ex:"I'm finna leave before the sun comes up.",exkr:"해 뜨기 전에 떠나려던 참이야",rhyme:"—",note:"gonna보다 더 스트리트한 어감. 남부 힙합의 시그니처."},
+{w:"boutta",meanings:["about to의 축약 — 막 ~하려는 참"],ex:"Boutta call you — don't make me regret it.",exkr:"지금 너한테 전화하려던 참이야 — 후회하게 하지 마",rhyme:"—",note:"'bouta, finna와 형제. 결심 직전의 긴장감을 담는 축약."},
+{w:"'bout",meanings:["about의 축약 — ~에 대해"],ex:"It was never 'bout the money.",exkr:"돈 때문이었던 적은 한 번도 없어",rhyme:"—",note:"What you talkin' 'bout? — 랩 벌스의 감초."},
+{w:"y'all",meanings:["you all의 축약 — 너희 모두 (남부)"],ex:"Y'all don't know the nights we survived.",exkr:"너흰 우리가 버텨온 밤들을 몰라",rhyme:"y'all – fall, all, call",note:"남부의 정겨운 복수형 you. 군중을 부를 때 따뜻한 어감."},
+{w:"gon'",meanings:["going to의 축약 — ~할 거야"],ex:"It's gon' be alright, just hold on.",exkr:"괜찮아질 거야, 조금만 버텨",rhyme:"—",note:"gonna보다 한 박자 더 짧아서 가스펠·R&B 훅에 최적."},
+{w:"lil",meanings:["little의 축약 — 작은, 조금"],ex:"Just a lil more time in this lil world of ours.",exkr:"우리만의 이 작은 세계에서, 조금만 더",rhyme:"—",note:"Lil Wayne, Lil Baby — 아예 예명이 된 축약. 애칭의 어감."},
+{w:"hella",meanings:["매우, 엄청 (베이 에어리어 슬랭)"],ex:"Hella miles between us, hella love intact.",exkr:"우리 사이 수천 마일, 그래도 사랑은 그대로",rhyme:"—",note:"very의 서부 해안 버전. hella tired, hella real."},
+{w:"lowkey",meanings:["은근히, 티 안 나게"],ex:"Lowkey hoping you text me first.",exkr:"은근히 네가 먼저 연락하길 바라고 있어",rhyme:"lowkey – slowly(슬랜트), only(슬랜트)",note:"솔직한데 안 솔직한 척 — 요즘 가사의 밀당 부사."},
+{w:"highkey",meanings:["대놓고, 완전"],ex:"Highkey lost without you, not even hiding it.",exkr:"너 없이 완전 길을 잃었어, 숨길 생각도 없어",rhyme:"—",note:"lowkey의 반대. 둘을 한 곡에 배치하면 감정의 낙차가 생겨요."},
+{w:"vibe",meanings:["분위기, 느낌","(동사) 통하다, 즐기다"],ex:"We don't talk much — we just vibe.",exkr:"우린 말이 많지 않아 — 그냥 통해",rhyme:"vibe – alive, drive, tribe",note:"이 시대 최다 사용 단어. vibe–alive–drive 라임 세트가 강력."},
+{w:"mood",meanings:["기분","(밈) 완전 공감, 그거 완전 나"],ex:"Rainy window, cold coffee — big mood.",exkr:"비 내리는 창가, 식은 커피 — 완전 내 기분",rhyme:"mood – good, understood(슬랜트)",note:"명사 하나로 끝내는 밈 화법. 'You're my whole mood'는 고백."},
+{w:"flex",meanings:["과시하다; 과시"],ex:"Love ain't a flex, but I'd still show you off.",exkr:"사랑은 자랑거리가 아니지만, 그래도 널 자랑하고 싶어",rhyme:"flex – next, checks",note:"weird flex but ok(희한한 자랑이네) 같은 밈도. 힙합 필수어."},
+{w:"drip",meanings:["(패션) 스타일, 멋","물방울"],ex:"Rain on my jacket — call it natural drip.",exkr:"재킷 위에 떨어진 빗방울 — 이것도 드립이라 부르자",rhyme:"drip – trip, grip",note:"물방울과 패션 감각의 이중 뜻을 살리면 재치 만점."},
+{w:"ice",meanings:["다이아몬드, 보석 (힙합)","얼음","차가움"],ex:"Ice on my wrist, but I'm cold inside.",exkr:"손목엔 다이아, 그런데 마음은 차갑게 식었어",rhyme:"ice – price, twice, sacrifice",note:"부(富)와 냉기의 이중성 — 힙합 발라드의 명장면 공식."},
+{w:"bread",meanings:["돈 (슬랭)","빵"],ex:"Chasing bread, losing sleep, missing dinners.",exkr:"돈을 좇느라 잠도 저녁도 잃어가",rhyme:"bread – head, said, ahead",note:"생계(빵)가 곧 돈이 된 어원. get this bread = 돈 벌자 (밈)."},
+{w:"bag",meanings:["돈, 큰 수익 (secure the bag)","가방"],ex:"Got the bag, but the seat next to me is empty.",exkr:"돈은 챙겼는데, 내 옆자리는 비어 있네",rhyme:"bag – flag, brag",note:"성공 뒤의 공허 — bag과 empty의 대비로 완성되는 서사."},
+{w:"wavy",meanings:["멋진, 기분 좋게 몽롱한","물결치는"],ex:"The night gets wavy when your song comes on.",exkr:"네 노래가 나오면 밤이 일렁이기 시작해",rhyme:"wavy – baby, lately(슬랜트)",note:"wave(웨이브 음악)에서 파생. 몽환 R&B 무드의 형용사."},
+{w:"lit",meanings:["신나는, 끝내주는","불붙은"],ex:"The city's lit, but I'm dim without you.",exkr:"도시는 불타는데, 너 없는 난 흐릿해",rhyme:"lit – it, admit",note:"lit(밝음)과 dim(어두움)의 대비 — 조명 은유의 정석."},
+{w:"slaps",meanings:["(곡이) 끝내준다"],ex:"Heartbreak hurts, but the song it wrote slaps.",exkr:"이별은 아팠지만, 그게 만들어준 곡은 끝내주지",rhyme:"—",note:"This song slaps! = 이 노래 미쳤다. 고통이 명곡이 되는 아이러니와 세트."},
+{w:"banger",meanings:["히트곡, 신나는 곡"],ex:"Pain writes the bangers — ask any songwriter.",exkr:"명곡은 아픔이 쓰는 거야 — 아무 작곡가한테나 물어봐",rhyme:"banger – stranger, danger",note:"banger–stranger–danger 라임 세트가 은근히 강력."},
+{w:"bop",meanings:["기분 좋은 곡, 명곡"],ex:"Our summer was a bop on repeat.",exkr:"우리의 여름은 무한 반복되는 명곡이었지",rhyme:"bop – stop, top, drop",note:"banger보다 가볍고 귀여운 어감. 팝 튠에 어울려요."},
+{w:"mid",meanings:["평범한, 그저 그런 (슬랭)"],ex:"They said the album's mid — I heard my heart in it.",exkr:"남들은 평작이래도, 난 그 안에서 내 심장을 들었어",rhyme:"mid – did, kid",note:"최근 몇 년 사이 가장 뜨거운 평가 슬랭. 자기 확신 가사와 궁합."},
+{w:"GOAT",meanings:["역대 최고 (Greatest Of All Time)"],ex:"You're the GOAT of leaving without goodbye.",exkr:"말없이 떠나는 것만큼은 네가 역대 최고야",rhyme:"goat – wrote, note, throat",note:"칭송과 비꼼 양쪽으로 쓰이는 왕관. 🐐 이모지가 공식 마크."},
+{w:"W",meanings:["승리 (win, 'dub'으로 발음)"],ex:"Take the W, I'll take the lesson.",exkr:"승리는 네가 가져, 난 교훈을 가질게",rhyme:"—",note:"take the W/L — 승패를 쿨하게 표기하는 인터넷 문법."},
+{w:"L",meanings:["패배, 손해 (loss)"],ex:"Took an L on love, still undefeated in hope.",exkr:"사랑에선 졌지만, 희망에선 아직 무패야",rhyme:"—",note:"take an L = 지다. 패배를 인정하는 힙합적 담백함."},
+{w:"no cap",meanings:["거짓말 아니고, 진심으로"],ex:"No cap, you had my whole heart.",exkr:"과장 하나 없이, 내 마음 전부 네 거였어",rhyme:"cap – map, trap, gap",note:"cap = 거짓말. 진정성 서약의 두 글자 — 훅 도입에 강력."},
+{w:"deadass",meanings:["진짜로, 정색하고 (뉴욕 슬랭)"],ex:"Deadass thought we'd grow old together.",exkr:"진심으로 우리가 같이 늙어갈 줄 알았어",rhyme:"—",note:"NYC의 진심 부사. 유머와 뼈아픔이 공존하는 어감."},
+{w:"fr",meanings:["for real의 축약 — 진짜로"],ex:"Miss you fr, not just at 2AM.",exkr:"새벽 2시만 말고, 진짜로 네가 그리워",rhyme:"—",note:"채팅어가 가사로 들어온 케이스. fr fr로 겹치면 강조."},
+{w:"on God",meanings:["신께 맹세코, 진짜로"],ex:"I changed for the better, on God.",exkr:"나 진짜 더 나은 사람이 됐어, 맹세해",rhyme:"—",note:"ong로 줄여 쓰기도. 힙합의 진정성 서약 최상급."},
+{w:"stan",meanings:["열성팬; 열렬히 지지하다"],ex:"I stan the version of me you believed in.",exkr:"네가 믿어줬던 그 시절의 나를, 나도 응원하기로 했어",rhyme:"stan – plan, can, again(슬랜트)",note:"에미넴의 곡 'Stan'에서 태어난 단어 — 사전에도 등재!"},
+{w:"simp",meanings:["상대에게 과하게 헌신하는 사람"],ex:"Call me a simp — I call it loving out loud.",exkr:"나보고 심프라 해도 좋아 — 난 그냥 크게 사랑할 뿐이야",rhyme:"—",note:"놀림을 자기 선언으로 뒤집는 구조가 요즘 가사의 문법."},
+{w:"receipts",meanings:["증거 (캡처·기록)"],ex:"I kept receipts of every promise you made.",exkr:"네가 했던 약속들, 전부 캡처해 뒀어",rhyme:"receipts – sheets, repeats",note:"영수증=증거. 폭로·언쟁 가사의 무기."},
+{w:"energy",meanings:["기운, 태도, 진심의 밀도"],ex:"Match my energy or watch me leave.",exkr:"내 온도에 맞춰줘, 아니면 떠나는 날 지켜보든가",rhyme:"energy – memory(슬랜트), enemy(슬랜트)",note:"match my energy = 나만큼 진심이어라. 자존감 앤섬 필수."},
+{w:"toxic",meanings:["(관계가) 해로운, 독성의"],ex:"We were toxic, but the melodies came out gold.",exkr:"우린 서로에게 독이었지만, 멜로디만은 금이 됐어",rhyme:"toxic – logic(슬랜트)",note:"toxic relationship — 2020년대 이별 가사의 중심 어휘."},
+{w:"red flag",meanings:["위험 신호 (관계)"],ex:"I sang right past every red flag.",exkr:"모든 위험 신호를 노래하며 그냥 지나쳐버렸어",rhyme:"flag – drag, bag",note:"연애 경고등. 깃발 이미지라 시각적 가사를 만들기 좋아요."},
+{w:"green flag",meanings:["좋은 신호, 안심되는 특징"],ex:"You remembered my coffee order — green flag.",exkr:"내 커피 취향을 기억해주다니 — 완전 그린 플래그야",rhyme:"—",note:"red flag의 반대로 최근 급부상. 설렘 포인트 나열형 가사에 딱."},
+{w:"situationship",meanings:["연인도 친구도 아닌 애매한 관계"],ex:"Stuck in a situationship with no exit sign.",exkr:"출구 표지판도 없는 애매한 관계에 갇혀버렸어",rhyme:"—",note:"situation+relationship 합성어. 현시대 썸의 공식 명칭."},
+{w:"cuffing season",meanings:["연애하고 싶어지는 계절 (늦가을~겨울)"],ex:"Cuffing season came around, and your side stayed cold.",exkr:"연애의 계절이 왔는데, 네 자리는 여전히 차갑네",rhyme:"—",note:"cuff = 수갑 채우다 → 계절성 연애 욕구. 겨울 R&B 소재."},
+{w:"the one that got away",meanings:["놓쳐버린 인연"],ex:"Every playlist has the one that got away.",exkr:"어떤 플레이리스트에나, 놓쳐버린 그 사람이 있지",rhyme:"away – stay, yesterday",note:"팝 발라드의 영원한 주제어. 케이티 페리 곡 제목이기도."},
+{w:"ride or die",meanings:["끝까지 함께할 사람"],ex:"My ride or die caught the last train out.",exkr:"평생 함께할 줄 알았던 네가, 마지막 기차를 타버렸어",rhyme:"die – July, goodbye, sky",note:"충성의 최상급이 배신과 만나면 서사가 폭발해요."},
+{w:"glow up",meanings:["환골탈태, 눈부신 성장"],ex:"Watch my glow up rise from the ashes you left.",exkr:"네가 남긴 잿더미에서 피어나는 내 성장기를 지켜봐",rhyme:"up – enough(슬랜트)",note:"이별 후 성장 앤섬(revenge glow-up)의 핵심어."},
+{w:"era",meanings:["(내 인생의) 시대, 시기"],ex:"This is my healing era — don't call me back.",exkr:"지금은 나의 회복기야 — 다시 부르지 마",rhyme:"—",note:"in my ~ era 밈. 인생을 앨범 시대처럼 구분하는 화법 — 뮤지션과 찰떡."},
+{w:"main character",meanings:["(내 삶의) 주인공"],ex:"Tonight I walk home like the main character.",exkr:"오늘 밤은 주인공처럼 집까지 걸어갈 거야",rhyme:"—",note:"main character energy = 주인공 서사 모드. 자기애 무드의 대표."},
+{w:"plot twist",meanings:["반전"],ex:"Plot twist — I was the one who loved you first.",exkr:"반전은 말이야 — 먼저 사랑한 건 나였다는 거",rhyme:"twist – missed, list",note:"이야기 용어를 관계에 이식. 훅 첫 단어로 강력."},
+{w:"throwback",meanings:["추억의 것, 회상"],ex:"Our song came on — instant throwback.",exkr:"우리 노래가 흘러나온 순간, 곧바로 그 시절로",rhyme:"back – track, black",note:"Throwback Thursday(#TBT)로 익숙. 음악=타임머신 소재."},
+{w:"slide",meanings:["(DM을) 슬쩍 보내다","들르다","미끄러지다"],ex:"Slide through when the moon clocks in.",exkr:"달이 출근하면, 슬쩍 들러줘",rhyme:"slide – ride, side, tide",note:"slide in the DMs = DM으로 대시하다. 부드러운 어감의 삼중 다의어."},
+{w:"link up",meanings:["만나다, 뭉치다"],ex:"Let's link up where the streetlights hum.",exkr:"가로등이 웅웅대는 곳에서 만나자",rhyme:"up – cup, what(슬랜트)",note:"체인이 연결되는 그림. 힙합·UK 신에서 특히 자주."},
+{w:"pull up",meanings:["(차 타고) 도착하다, 나타나다"],ex:"Pull up slow with the windows down.",exkr:"창문 내리고 천천히 들어와",rhyme:"up – love(슬랜트)",note:"드라이브 문화의 동사. pull up on me = 나 보러 와."},
+{w:"no strings attached",meanings:["조건 없이, 구속 없이"],ex:"You said no strings — then why am I tangled?",exkr:"조건 없다며 — 근데 왜 난 이렇게 얽혀버린 거야?",rhyme:"attached – matched, catch(슬랜트)",note:"strings(끈)의 은유를 tangled(얽힘)로 받으면 워드플레이 완성."},
+{w:"off the grid",meanings:["연락 두절의, 세상과 단절된"],ex:"Let's go off the grid — just us and the coastline.",exkr:"연락 다 끊고 사라지자 — 우리 둘과 해안선만 남게",rhyme:"grid – did, hid",note:"grid = 전력망·통신망. 디지털 시대의 도피 로망."}
+];
+LYRIC.find(l=>l.id==="slang").words.push(...LYRIC_SLANG_ADD);
+
+/* ===== 작사 노트: 감성 단어 +50 ===== */
+LYRIC_MOOD_ADD = [
+{w:"dusk",meanings:["황혼, 땅거미"],ex:"We talk more honest after dusk.",exkr:"땅거미가 지면, 우린 좀 더 솔직해져",rhyme:"dusk – us(슬랜트), trust(슬랜트)",note:"dawn의 반대편. 하루의 필터가 벗겨지는 시간의 단어."},
+{w:"twilight",meanings:["박명, 해 진 직후의 빛","(비유) 끝나가는 시기"],ex:"We're caught in the twilight of what we were.",exkr:"우린 우리였던 것의 황혼에 갇혀 있어",rhyme:"twilight – midnight, tonight",note:"낮도 밤도 아닌 경계 — 애매한 관계의 완벽한 은유."},
+{w:"afterglow",meanings:["노을의 잔광; (좋았던 일의) 여운"],ex:"I'm still living in our afterglow.",exkr:"난 아직 우리의 잔광 속에 살고 있어",rhyme:"afterglow – know, go, slow",note:"불꽃이 꺼진 뒤 남는 빛 — 이별 직후 감정의 표준어."},
+{w:"moonlit",meanings:["달빛이 비추는"],ex:"Moonlit road, windows down, nowhere due.",exkr:"달빛 깔린 도로, 창문은 열고, 갈 곳은 없고",rhyme:"moonlit – (수식어로 행 중간 추천)",note:"-lit(빛이 켜진) 계열: moonlit, sunlit, candlelit — 장면 조명 스위치."},
+{w:"starlit",meanings:["별빛이 비추는"],ex:"A starlit ceiling for a sleepless bed.",exkr:"잠 못 드는 침대 위엔 별빛 천장뿐",rhyme:"starlit – (수식어 추천)",note:"천장을 하늘로 바꾸는 한 단어. 불면 가사와 궁합."},
+{w:"silhouette",meanings:["실루엣, 그림자 윤곽"],ex:"Your silhouette still owns my doorway.",exkr:"내 문가엔 아직 네 실루엣이 살고 있어",rhyme:"silhouette – regret, forget, cigarette",note:"regret/forget과의 라임이 예술 — 미련 가사의 시각 장치."},
+{w:"mirage",meanings:["신기루"],ex:"I keep chasing a mirage that wears your smile.",exkr:"네 미소를 한 신기루를 자꾸만 좇고 있어",rhyme:"mirage – (행 중간 추천)",note:"가까워질수록 사라지는 것 — 짝사랑의 물리학."},
+{w:"reverie",meanings:["몽상, 꿈결 같은 상념"],ex:"Lost in a soft reverie of last July.",exkr:"지난 7월의 부드러운 몽상에 잠겨버렸어",rhyme:"reverie – memory, melody",note:"reverie–memory–melody 라임 삼각형은 드림팝의 보석."},
+{w:"nostalgia",meanings:["향수, 그리움"],ex:"Nostalgia tastes like cheap coffee and you.",exkr:"향수는 싸구려 커피와 너의 맛이 나",rhyme:"nostalgia – (행 중간 추천)",note:"감각(맛·냄새)과 붙이면 구체적이 돼요. 그리움의 학명."},
+{w:"bittersweet",meanings:["씁쓸하면서 달콤한"],ex:"Endings are bittersweet — that's why they sparkle.",exkr:"끝은 씁쓸달콤해 — 그래서 반짝이는 거야",rhyme:"bittersweet – heartbeat, repeat, street",note:"모순 형용사의 제왕. heartbeat/repeat 라임까지 완벽."},
+{w:"tender",meanings:["다정한, 여린"],ex:"Handle tonight tender — it bruises easy.",exkr:"오늘 밤은 다정히 다뤄줘 — 쉽게 멍드니까",rhyme:"tender – surrender, remember(슬랜트)",note:"tender–surrender는 소울·R&B의 명라임."},
+{w:"delicate",meanings:["섬세한, 연약한"],ex:"We were delicate — too delicate for winter.",exkr:"우린 섬세했지 — 겨울을 나기엔 너무 여렸어",rhyme:"delicate – intricate(슬랜트)",note:"fragile이 유리라면 delicate은 레이스 — 질감이 달라요."},
+{w:"flicker",meanings:["(불빛이) 깜박이다; 깜박임"],ex:"Hope flickers like a dying streetlight.",exkr:"희망이 수명 다한 가로등처럼 깜박여",rhyme:"flicker – quicker, whisper(슬랜트)",note:"꺼질 듯 안 꺼지는 상태 — 미련의 조도(照度)."},
+{w:"shimmer",meanings:["일렁이며 반짝이다"],ex:"The river shimmers with borrowed neon.",exkr:"강물이 도시의 네온을 빌려 입고 일렁여",rhyme:"shimmer – dimmer, glimmer",note:"shimmer/glimmer/dimmer — 빛 삼형제 라임."},
+{w:"glisten",meanings:["(젖은 것이) 반짝이다"],ex:"Rain-glistened streets still sing your name.",exkr:"비에 젖어 반짝이는 거리가 아직 네 이름을 불러",rhyme:"glisten – listen(황금 라임!)",note:"glisten–listen은 발견한 사람만 아는 보석 라임."},
+{w:"gleam",meanings:["희미하게 빛나다; 어스름한 광"],ex:"A gleam of morning slips through the blinds.",exkr:"아침의 희미한 빛이 블라인드 틈으로 스며들어",rhyme:"gleam – dream, seem, daydream",note:"gleam–dream 라임과 새벽 장면의 만남."},
+{w:"radiant",meanings:["눈부시게 빛나는"],ex:"You walked in radiant and ruined my cool.",exkr:"네가 눈부시게 들어와서, 내 침착함이 다 무너졌어",rhyme:"radiant – (행 중간 추천)",note:"glow의 최상급 버전. 첫눈에 반하는 장면 전용."},
+{w:"luminous",meanings:["은은하게 빛을 내는"],ex:"Luminous — that's the word for 2AM you.",exkr:"'은은히 빛나는' — 새벽 2시의 너를 부르는 말",rhyme:"luminous – numerous(슬랜트)",note:"자체 발광의 뉘앙스. 사람에게 쓰면 최고급 찬사."},
+{w:"ember",meanings:["잔불, 사그라드는 불씨"],ex:"We burned down to embers, still warm to the touch.",exkr:"우린 잔불로 사그라들었지만, 만지면 아직 따뜻해",rhyme:"ember – remember, December, September",note:"remember·December와의 라임은 팝 역사의 검증 완료."},
+{w:"ashes",meanings:["재"],ex:"I'm building springtime out of our ashes.",exkr:"우리의 잿더미 위에 봄을 짓고 있어",rhyme:"ashes – crashes, flashes",note:"불의 서사의 마지막 장이자, 재기 서사의 첫 장."},
+{w:"wildfire",meanings:["들불, 걷잡을 수 없는 불"],ex:"Rumors spread like wildfire — so did we.",exkr:"소문은 들불처럼 번졌고 — 우리도 그랬지",rhyme:"wildfire – desire, higher, entire",note:"wildfire–desire–higher — 상승과 파멸의 라임 사다리."},
+{w:"thunder",meanings:["천둥"],ex:"Your heartbeat on my ear — distant thunder.",exkr:"귓가에 닿는 네 심장 소리 — 머나먼 천둥 같아",rhyme:"thunder – under, wonder",note:"thunder–under–wonder 라임 트리오. 예감과 설렘의 소리."},
+{w:"monsoon",meanings:["장마, 우기"],ex:"There's a monsoon season in my chest.",exkr:"내 가슴엔 장마철이 들어 있어",rhyme:"monsoon – June, moon, too soon",note:"June/moon/too soon과 라임 — 여름 이별 가사의 기상 캐스터."},
+{w:"breeze",meanings:["산들바람","(비유) 쉬운 일"],ex:"Loving you was easy — a rooftop breeze.",exkr:"널 사랑하는 건 쉬웠어 — 옥상의 산들바람처럼",rhyme:"breeze – ease, please, memories",note:"It's a breeze = 식은 죽 먹기. 회화와 가사 양쪽에서 활약."},
+{w:"tide",meanings:["조수, 밀물과 썰물"],ex:"Feelings pull like tides — I stopped fighting the moon.",exkr:"감정은 조수처럼 밀려와 — 난 달과 싸우길 관뒀어",rhyme:"tide – side, ride, collide",note:"오고 가는 것의 대명사. high tide/low tide로 감정 기복 표현."},
+{w:"undertow",meanings:["(수면 아래) 역류, 저류"],ex:"Your memory is an undertow — calm above, pulling below.",exkr:"네 기억은 저류야 — 겉은 잔잔한데 밑에선 날 끌어당겨",rhyme:"undertow – low, below, don't know",note:"겉과 속이 다른 감정의 물리학. 고급 어휘의 품격."},
+{w:"ripple",meanings:["잔물결; 파문"],ex:"One text from you — a thousand ripples in me.",exkr:"네 문자 한 통에, 내 안엔 천 개의 파문",rhyme:"ripple – little(슬랜트)",note:"작은 원인, 퍼지는 결과 — 미니멀 가사의 물결 효과."},
+{w:"horizon",meanings:["수평선, 지평선"],ex:"I chase a horizon that keeps your shape.",exkr:"네 모습을 한 수평선을 계속 뒤쫓아가",rhyme:"horizon – eyes on(슬랜트)",note:"도달할 수 없는 목적지의 대명사. 드라이브 가사의 목적어."},
+{w:"wanderlust",meanings:["방랑벽, 떠나고 싶은 갈망"],ex:"Wanderlust, but every road spells your name.",exkr:"떠나고 싶은데, 모든 길이 네 이름을 그려",rhyme:"wanderlust – trust, dust, us",note:"독일어에서 온 로망 단어. dust/us와의 라임이 유용."},
+{w:"solace",meanings:["위안, 위로"],ex:"I found solace in track eleven.",exkr:"11번 트랙에서 위안을 찾았어",rhyme:"solace – promise(슬랜트)",note:"comfort보다 문학적인 위로. 음악=피난처 서사에 딱."},
+{w:"serendipity",meanings:["우연히 찾아온 행운"],ex:"Serendipity wore your perfume that night.",exkr:"그날 밤, 우연이란 녀석은 네 향수를 뿌리고 있었지",rhyme:"serendipity – city(슬랜트), infinity(슬랜트)",note:"운명적 만남의 학명. 발음 자체가 멜로디."},
+{w:"ephemeral",meanings:["하루살이처럼 짧은, 찰나의"],ex:"Ephemeral — us, the summer, the high.",exkr:"찰나였지 — 우리도, 그 여름도, 그 황홀함도",rhyme:"ephemeral – (행 중간 추천)",note:"아름다움+짧음이 한 단어에. 고급 어휘의 대표 주자."},
+{w:"eternity",meanings:["영원"],ex:"Five minutes with you outweighs eternity.",exkr:"너와의 5분이 영원보다 무거워",rhyme:"eternity – me, be, memory",note:"찰나(ephemeral)와 짝을 이루는 반대극 — 둘을 한 곡에."},
+{w:"whisper",meanings:["속삭임; 속삭이다"],ex:"The city whispers when you're gone.",exkr:"네가 없으면 도시가 속삭이기 시작해",rhyme:"whisper – closer(슬랜트), missed her(모자이크 라임!)",note:"whisper–missed her 같은 두 단어 라임(모자이크)이 힙합의 묘미."},
+{w:"hush",meanings:["고요, 정적; 조용히 시키다"],ex:"A hush fell where your laugh used to live.",exkr:"네 웃음이 살던 자리에 정적이 내려앉았어",rhyme:"hush – rush, crush, blush",note:"hush–rush–crush–blush — 설렘 4종 라임 세트."},
+{w:"lullaby",meanings:["자장가"],ex:"Sing me a lullaby made of rain.",exkr:"빗소리로 만든 자장가를 불러줘",rhyme:"lullaby – goodbye, july, midnight sky",note:"goodbye와의 라임이 반칙급 — 다정함과 이별을 잇는 다리."},
+{w:"heartbeat",meanings:["심장박동"],ex:"Two heartbeats syncing at a red light.",exkr:"빨간불 앞에서 포개지는 두 개의 심장박동",rhyme:"heartbeat – street, repeat, bittersweet",note:"음악의 BPM과 심장의 BPM — 뮤지션에겐 이중 은유."},
+{w:"pulse",meanings:["맥박; (도시·음악의) 고동"],ex:"The bassline found my pulse and stayed.",exkr:"베이스라인이 내 맥박을 찾아내곤 떠나지 않았어",rhyme:"pulse – (행 중간 추천)",note:"도시의 pulse, 비트의 pulse — 살아있음의 최소 단위."},
+{w:"static",meanings:["(라디오) 잡음","정전기","멈춰 있는"],ex:"All I get is static where your voice used to be.",exkr:"네 목소리가 있던 자리엔 이제 지직거림뿐이야",rhyme:"static – dramatic, automatic",note:"연락 두절을 라디오 잡음으로 — 음악 장비 은유의 백미."},
+{w:"frequency",meanings:["주파수","빈도"],ex:"We loved on the same frequency.",exkr:"우린 같은 주파수에서 사랑했지",rhyme:"frequency – recently(슬랜트), memory(슬랜트)",note:"tune in(맞추다)·static(잡음)과 세트로 라디오 세계관 완성."},
+{w:"wavelength",meanings:["파장; (비유) 생각의 결"],ex:"Same wavelength, different worlds.",exkr:"파장은 같은데, 사는 세계가 달랐어",rhyme:"wavelength – (행 중간 추천)",note:"on the same wavelength = 마음이 통하다 — 회화로도 그대로."},
+{w:"satellite",meanings:["위성; (비유) 곁을 맴도는 존재"],ex:"I orbit you like a lonely satellite.",exkr:"난 외로운 위성처럼 네 주위를 돌아",rhyme:"satellite – night, light, out of sight",note:"닿지 못하고 맴도는 관계의 우주적 표현."},
+{w:"orbit",meanings:["궤도; 궤도를 돌다"],ex:"Stuck in your orbit — call it gravity's fault.",exkr:"네 궤도에 갇혔어 — 중력 탓이라고 해두자",rhyme:"orbit – (행 중간 추천)",note:"gravity(중력)와 세트로 쓰면 물리학 러브송 완성."},
+{w:"stardust",meanings:["별가루, 우주 먼지"],ex:"We're stardust pretending to be strangers.",exkr:"우린 서로 모르는 척하는 별가루야",rhyme:"stardust – trust, us",note:"'우리 모두 별의 잔해'라는 과학적 사실이 주는 낭만."},
+{w:"aurora",meanings:["오로라; 새벽빛"],ex:"Your laugh — an aurora in a gray week.",exkr:"네 웃음은 잿빛 한 주에 뜬 오로라였어",rhyme:"aurora – for ya(모자이크)",note:"로마 신화의 새벽의 여신 이름이기도. 희귀하고 찬란한 것의 대명사."},
+{w:"oasis",meanings:["오아시스; 안식처"],ex:"You were an oasis — or maybe I was just thirsty.",exkr:"넌 오아시스였어 — 아니면 내가 그저 목말랐던 걸까",rhyme:"oasis – places(슬랜트), faces(슬랜트)",note:"반전(신기루였나?)까지 내장된 단어. 밴드 이름으로도 유명하죠."},
+{w:"thorn",meanings:["가시"],ex:"Every rose you gave me kept its thorn.",exkr:"네가 준 장미는 하나같이 가시를 품고 있었지",rhyme:"thorn – torn, worn, sworn",note:"thorn–torn–sworn 라임 세트. 장미와 세트인 아픔의 단어."},
+{w:"petal",meanings:["꽃잎"],ex:"Loving you was petals — soft, and always falling.",exkr:"널 사랑하는 건 꽃잎 같았어 — 부드럽고, 늘 지고 있었지",rhyme:"petal – settle, metal(슬랜트)",note:"피는 것과 지는 것을 동시에 담는 단어. fall과 연결 가능."},
+{w:"amber",meanings:["호박색; 호박(보석)"],ex:"Amber streetlights preserve that night like resin.",exkr:"호박색 가로등이 그 밤을 송진처럼 봉인해 뒀어",rhyme:"amber – remember(슬랜트)",note:"호박 속 화석처럼 '보존된 기억'의 이미지 — 고급 은유."},
+{w:"crimson",meanings:["진홍색"],ex:"Crimson skies over our last drive home.",exkr:"마지막으로 함께 돌아오던 길, 하늘은 진홍빛이었지",rhyme:"crimson – (행 중간 추천)",note:"red보다 깊고 문학적인 붉음. 노을·립스틱·이별의 색."}
+];
+LYRIC.find(l=>l.id==="mood").words.push(...LYRIC_MOOD_ADD);
+
+/* ===== 작사 노트: 실제 노래에 사용된 표현 (Song Staples) ===== */
+LYRIC.find(l=>l.id==="slang").desc="가사를 진짜 말처럼 만드는 축약어 · 슬랭 (저작권 문제없음, 사용 가능)";
+const LYRIC_STOCK={id:"stock",name:"실제 노래에 사용된 표현",sub:"Song Staples",desc:"수많은 명곡들이 공유하는 상용구 — 짧은 관용 표현·문구는 저작권 보호 대상이 아니라서 자유롭게 사용 가능해요. 예시 라인은 전부 오리지널.",words:[
+{w:"all night long",meanings:["밤새도록"],ex:"We could talk about nothing all night long.",exkr:"우린 아무것도 아닌 얘기로도 밤을 새울 수 있어",rhyme:"long – song, wrong, strong",note:"파티송부터 발라드까지 전천후로 쓰이는 시간 상용구. long–song 라임은 반칙급."},
+{w:"one more time",meanings:["한 번만 더"],ex:"Play it back, just one more time.",exkr:"딱 한 번만 더, 그 순간을 재생해줘",rhyme:"time – mine, line, rhyme",note:"재생·재회·재도전 — '반복'을 비는 모든 훅의 단골. 댄스부터 발라드까지."},
+{w:"over and over",meanings:["몇 번이고, 반복해서"],ex:"Your name loops over and over in my head.",exkr:"네 이름이 머릿속에서 몇 번이고 반복 재생돼",rhyme:"over – closer(슬랜트), sober(!)",note:"over–sober 라임은 하임발라드의 숨은 무기. 반복 구조라 훅 멜로디에 착 붙어요."},
+{w:"back to you",meanings:["너에게로 다시 (돌아가다)"],ex:"Every road I take bends back to you.",exkr:"어떤 길로 가도 결국 너에게로 휘어져",rhyme:"you – do, true, through",note:"회귀 서사의 3단어. keep coming back to you 형태로 무한 변주."},
+{w:"on my mind",meanings:["머릿속에 맴도는, 계속 생각나는"],ex:"Rainy days put you back on my mind.",exkr:"비 오는 날이면 네가 다시 떠올라",rhyme:"mind – find, behind, kind",note:"그리움의 위치를 말해주는 표준 전치사구. always on my mind로 강조."},
+{w:"out of my head",meanings:["머리에서 떠나지 않는; 제정신이 아닌"],ex:"I can't dance you out of my head.",exkr:"춤을 춰봐도 넌 머릿속에서 지워지지 않아",rhyme:"head – said, bed, instead",note:"can't get you out of my head 구조로 수십 년째 재생산되는 상용구. 다의어(제정신 아님)로도."},
+{w:"by my side",meanings:["내 곁에"],ex:"The city's loud, but it's quiet by my side without you.",exkr:"도시는 시끄러운데, 네가 없는 내 곁만 조용해",rhyme:"side – ride, tide, collide",note:"곁의 자리를 뜻하는 위치 상용구. stand by my side, right by my side로 확장."},
+{w:"let you go",meanings:["너를 보내주다, 놓아주다"],ex:"I wrote ten songs and still can't let you go.",exkr:"열 곡을 쓰고도 여전히 널 놓지 못했어",rhyme:"go – know, slow, alone(슬랜트)",note:"이별 발라드의 심장. never let you go(반대 선언)와 세트로 알아두기."},
+{w:"hold you close",meanings:["너를 꼭 껴안다"],ex:"One dance — let me hold you close till the song forgets to end.",exkr:"한 곡만 — 노래가 끝나는 걸 잊을 때까지 널 안고 있을게",rhyme:"close – most, ghost(슬랜트)",note:"슬로우 댄스 장면의 공식 동사구. hold me close로 뒤집으면 부탁이 돼요."},
+{w:"set me free",meanings:["나를 자유롭게 해줘"],ex:"Say it hurts, say it's done — just set me free.",exkr:"아프다고, 끝났다고 말해줘 — 그냥 날 놓아줘",rhyme:"free – me, be, finally",note:"해방의 3단어. 사랑·속박·자기해방 어디에나 이식 가능한 만능 훅."},
+{w:"up all night",meanings:["밤을 꼬박 새운"],ex:"Up all night, trading secrets with the moon.",exkr:"밤을 새워, 달과 비밀을 주고받았지",rhyme:"night – light, right, alright",note:"파티·통화·불면 — 밤샘의 이유만 바꾸면 장르가 바뀌는 상용구."},
+{w:"falling for you",meanings:["너에게 빠져드는 중"],ex:"Autumn came early — I'm falling for you.",exkr:"올해는 가을이 일찍 왔네 — 너에게 물들고 있으니까",rhyme:"you – new, view, into",note:"fall(가을/추락/사랑)의 다의어를 그대로 품은 구. 계절 가사와 최고 궁합."},
+{w:"till the end of time",meanings:["시간이 끝나는 날까지"],ex:"Keep my number till the end of time.",exkr:"시간이 다하는 날까지 내 번호는 지우지 마",rhyme:"time – mine, shine, line",note:"영원 서약의 최상급 표현. forever보다 한 뼘 더 시적."},
+{w:"never let go",meanings:["절대 놓지 않다"],ex:"Hands on the wheel, hearts saying never let go.",exkr:"손은 핸들 위에, 마음은 '절대 놓지 마'라고 말하고 있어",rhyme:"go – know, home(슬랜트), road",note:"붙잡음의 선언. 영화 명장면들 덕에 이미지가 자동 재생되는 구."},
+{w:"take my hand",meanings:["내 손을 잡아"],ex:"Take my hand — the night knows the way.",exkr:"내 손을 잡아 — 길은 밤이 알고 있으니까",rhyme:"hand – stand, understand, planned",note:"초대와 신뢰의 제스처. 첫 소절 도입부에 놓으면 이야기가 열려요."},
+{w:"through the night",meanings:["밤을 지나, 밤새도록"],ex:"Your voice carries me through the night.",exkr:"네 목소리가 밤을 건너는 나를 실어 날라",rhyme:"night – flight, tight, moonlight",note:"밤을 '통과'하는 이동감이 핵심. 자장가·응원가 양쪽에서 활약."},
+{w:"in the moonlight",meanings:["달빛 아래에서"],ex:"Everything's honest in the moonlight.",exkr:"달빛 아래선 모든 게 솔직해져",rhyme:"moonlight – midnight, alright, tonight",note:"장면 조명을 켜는 4음절. 낭만·비밀·고백의 조도."},
+{w:"dancing in the rain",meanings:["빗속에서 춤추기 (역경 속의 기쁨)"],ex:"We lost the umbrella and found ourselves dancing in the rain.",exkr:"우산을 잃어버린 대신, 빗속에서 춤추는 우릴 발견했지",rhyme:"rain – pain, again, remain",note:"rain–pain–again은 팝 역사상 최다 사용 라임 트리오. 불행을 낭만으로 뒤집는 그림."},
+{w:"against the world",meanings:["온 세상을 상대로 (우리 둘뿐)"],ex:"Two seats, one playlist, us against the world.",exkr:"좌석 둘, 플레이리스트 하나, 세상에 맞서는 우리",rhyme:"world – girl, unfurled",note:"you and me against the world 구조 — 연대와 반항의 클래식."},
+{w:"one last time",meanings:["마지막으로 한 번만"],ex:"Meet me where it started, one last time.",exkr:"우리가 시작된 곳에서, 마지막으로 한 번만 만나",rhyme:"time – goodbye(슬랜트), mine",note:"이별 직전의 부탁. one more time(반복)과 온도가 다른 '최후'의 한 번."},
+{w:"call your name",meanings:["네 이름을 부르다"],ex:"Empty hallways still call your name.",exkr:"텅 빈 복도가 아직 네 이름을 불러",rhyme:"name – same, flame, shame",note:"부재를 소리로 표현하는 정석. name–same–flame 라임 세트 강력."},
+{w:"can't get enough",meanings:["아무리 해도 모자라"],ex:"Replay the chorus — I can't get enough of us.",exkr:"후렴을 다시 틀어 — 우리가 아무리 들어도 모자라",rhyme:"enough – love(슬랜트), touch(슬랜트)",note:"중독·갈망의 상용구. enough–love 슬랜트 라임은 팝의 국민 조합."},
+{w:"more than words",meanings:["말보다 더한 것, 말로는 부족한"],ex:"You deserve more than words, so here's a melody.",exkr:"말로는 부족한 너라서, 대신 멜로디를 줄게",rhyme:"words – hurts(슬랜트), birds",note:"언어의 한계를 고백하며 음악으로 넘어가는 다리 — 작곡가의 고백법."},
+{w:"lost in you",meanings:["너에게 빠져 길을 잃은"],ex:"No map, no signal, happily lost in you.",exkr:"지도도 신호도 없이, 기꺼이 네 안에서 길을 잃었어",rhyme:"you – through, view, do",note:"lost의 부정적 의미를 로맨스로 뒤집는 구조. get lost in ~ 형태로 변주."},
+{w:"waiting for you",meanings:["너를 기다리는 중"],ex:"Same bench, same song, still waiting for you.",exkr:"같은 벤치, 같은 노래, 여전히 너를 기다려",rhyme:"you – knew, view, overdue(!)",note:"overdue(늦어진)와의 라임이 세련 포인트. 기다림 서사의 기본형."},
+{w:"burn it down",meanings:["다 태워버리다 (과거·미련의 청산)"],ex:"Take the photos, take the letters — burn it down.",exkr:"사진도 편지도 다 가져다 — 태워버려",rhyme:"down – town, crown, now(슬랜트)",note:"청산과 재출발의 파이어 앤섬 상용구. burn–learn–turn 라임과도 연결."},
+{w:"light up the sky",meanings:["하늘을 밝히다"],ex:"Your laugh could light up the sky at 4AM.",exkr:"네 웃음은 새벽 4시의 하늘도 밝힐 수 있어",rhyme:"sky – high, fly, goodbye",note:"불꽃놀이·희망·존재감의 표준 이미지. sky–high–fly 라임 사다리."},
+{w:"home to you",meanings:["너에게로 돌아가다 (너 = 집)"],ex:"Every tour ends the same — I come home to you.",exkr:"어떤 투어든 끝은 똑같아 — 난 너에게로 돌아가",rhyme:"you – true, through, new",note:"장소가 아닌 사람을 집으로 만드는 구조. 투어 도는 뮤지션의 단골 고백."},
+{w:"lose control",meanings:["자제력을 잃다, 무너지다"],ex:"One slow song and I lose control.",exkr:"느린 노래 한 곡에 나는 무장해제 돼버려",rhyme:"control – soul, whole, role",note:"control–soul–whole은 R&B 라임의 기둥. 절제와 해방 사이의 스위치."},
+{w:"heart on my sleeve",meanings:["감정을 숨기지 않고 드러내다"],ex:"I wear my heart on my sleeve and sing it out loud.",exkr:"난 마음을 소매에 걸고, 큰 소리로 노래해",rhyme:"sleeve – leave, believe, breathe",note:"중세 기사 문화에서 온 관용구이자 가사 단골. sleeve–leave–believe 라임 세트."}
+]};
+LYRIC.push(LYRIC_STOCK);
 
 /* ================= ALBUM COVER ART (SVG) ================= */
 const COVERS = {
@@ -1180,6 +1505,26 @@ slang: () => `
 <text x="200" y="330" text-anchor="middle" font-family="inherit" font-size="30" font-weight="900" letter-spacing="3" fill="#e8e8f0">gonna &#183; wanna &#183; &#8217;cause</text>
 <text x="200" y="366" text-anchor="middle" font-family="inherit" font-size="17" font-weight="700" letter-spacing="6" fill="#8a8a96">SAY IT SHORTER</text>
 </svg>`,
+stock: () => `
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+<defs>
+<linearGradient id="sk-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#101210"/><stop offset="1" stop-color="#0d0d12"/></linearGradient>
+<radialGradient id="sk-shine" cx=".35" cy=".35" r=".65"><stop offset="0" stop-color="#ffffff" stop-opacity=".14"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="400" height="400" fill="url(#sk-bg)"/>
+<circle cx="200" cy="186" r="132" fill="#141416"/>
+<circle cx="200" cy="186" r="132" fill="url(#sk-shine)"/>
+${[120,104,88,72].map(r=>`<circle cx="200" cy="186" r="${r}" fill="none" stroke="#26262c" stroke-width="1.6"/>`).join("")}
+<circle cx="200" cy="186" r="48" fill="#1ed760"/>
+<circle cx="200" cy="186" r="48" fill="url(#sk-shine)"/>
+<text x="200" y="180" text-anchor="middle" font-family="inherit" font-size="15" font-weight="900" letter-spacing="1" fill="#04180a">DBLV</text>
+<text x="200" y="199" text-anchor="middle" font-family="inherit" font-size="9.5" font-weight="800" letter-spacing="2" fill="#0a3a18">SIDE A</text>
+<circle cx="200" cy="186" r="5" fill="#0b0b0f"/>
+<line x1="316" y1="70" x2="276" y2="140" stroke="#8a8a96" stroke-width="7" stroke-linecap="round"/>
+<circle cx="320" cy="64" r="13" fill="#23232c" stroke="#3a3a46" stroke-width="3"/>
+<rect x="268" y="136" width="18" height="12" rx="4" fill="#8a8a96" transform="rotate(60 277 142)"/>
+<text x="200" y="366" text-anchor="middle" font-family="inherit" font-size="19" font-weight="800" letter-spacing="7" fill="#1ed760">SONG STAPLES</text>
+</svg>`,
 mood: () => `
 <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
 <defs>
@@ -1334,7 +1679,10 @@ function render(){
   v.innerHTML=(map[S.view]||vHome)();
   syncNav();
   $(".main").scrollTop=0;
-  if(S.view==="player"){ const cur=v.querySelector(".track-row.current"); if(cur) cur.scrollIntoView({block:"nearest"}); }
+  if(S.view==="player"){
+    const tl=v.querySelector(".pa-tracks .tracklist"), cur=v.querySelector(".track-row.current");
+    if(tl&&cur&&tl.scrollHeight>tl.clientHeight+4){ tl.scrollTop=Math.max(0,cur.offsetTop-tl.clientHeight/2); }
+  }
   persist();
 }
 
@@ -1579,11 +1927,11 @@ function buildFlashDeck(){
   const deck=[];
   poolSentences().forEach(x=>{
     deck.push(S.dir==="ko2en"
-      ?{id:x.id,front:x.s.kr,frontSub:x.s.sit,back:x.s.en,backSub:x.s.tip||"",say:x.s.en,labF:"KOREAN — 영어로 말해보세요",labB:"ENGLISH"}
-      :{id:x.id,front:x.s.en,frontSub:x.s.sit,back:x.s.kr,backSub:x.s.tip||"",say:x.s.en,labF:"ENGLISH — 뜻을 떠올려보세요",labB:"KOREAN"});
+      ?{id:x.id,front:x.s.kr,frontSub:x.s.sit,back:x.s.en,backSub:x.s.tip||"",say:x.s.en,sayF:null,labF:"KOREAN — 영어로 말해보세요",labB:"ENGLISH"}
+      :{id:x.id,front:x.s.en,frontSub:x.s.sit,back:x.s.kr,backSub:x.s.tip||"",say:x.s.en,sayF:x.s.en,labF:"ENGLISH — 뜻을 떠올려보세요",labB:"KOREAN"});
   });
   poolWords().forEach(x=>{
-    deck.push({id:x.id,front:x.w.w,frontSub:x.list.name,back:x.w.meanings.join(" · "),backSub:'"'+x.w.ex+'"',say:x.w.w,labF:"WORD — 뜻을 떠올려보세요",labB:"MEANING"});
+    deck.push({id:x.id,front:x.w.w,frontSub:x.list.name,back:x.w.meanings.join(" · "),backSub:'"'+x.w.ex+'"',say:x.w.w,sayF:x.w.w,labF:"WORD — 뜻을 떠올려보세요",labB:"MEANING"});
   });
   return shuffle(deck);
 }
@@ -1606,6 +1954,7 @@ function vFlash(){
         <div class="flash-face"><span class="lab">${esc(c.labF)}</span>
           <div class="main-txt">${esc(c.front)}</div>
           ${c.frontSub?`<div class="sub-txt">${esc(c.frontSub)}</div>`:""}
+          ${c.sayF?`<button class="ctl" style="margin-top:4px" data-act="say" data-say="raw|${esc(c.sayF)}" title="발음 듣기">${I.spk}</button>`:""}
           <span class="hint">카드를 탭하면 뒤집혀요</span></div>
         <div class="flash-face back"><span class="lab">${esc(c.labB)}</span>
           <div class="main-txt">${esc(c.back)}</div>
@@ -1817,7 +2166,7 @@ function handle(el){
     case "dir": S.dir=d.k; render(); break;
     case "start-flash": startFlash(buildFlashDeck()); break;
     case "flash-list":{ S.scope="lyric";
-      const deck=shuffle(LIST_BY_ID[d.list].words.map((w,i)=>({id:`w:${d.list}:${i}`,front:w.w,frontSub:LIST_BY_ID[d.list].name,back:w.meanings.join(" · "),backSub:'"'+w.ex+'"',say:w.w,labF:"WORD — 뜻을 떠올려보세요",labB:"MEANING"})));
+      const deck=shuffle(LIST_BY_ID[d.list].words.map((w,i)=>({id:`w:${d.list}:${i}`,front:w.w,frontSub:LIST_BY_ID[d.list].name,back:w.meanings.join(" · "),backSub:'"'+w.ex+'"',say:w.w,sayF:w.w,labF:"WORD — 뜻을 떠올려보세요",labB:"MEANING"})));
       startFlash(deck); break; }
     case "hearts-flash": S.scope="hearts"; startFlash(buildFlashDeck()); break;
     case "flip": S.flash.flipped=!S.flash.flipped; render(); break;

@@ -1,4 +1,4 @@
-const CACHE = "dblv-v1";
+const CACHE = "dblv-v2";
 const ASSETS = ["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png"];
 
 self.addEventListener("install", e => {
@@ -9,13 +9,27 @@ self.addEventListener("activate", e => {
 });
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
-  e.respondWith(
-    caches.match(e.request, { ignoreSearch: true }).then(hit => hit || fetch(e.request).then(res => {
-      if (res.ok && new URL(e.request.url).origin === location.origin) {
+  const url = new URL(e.request.url);
+  const isNav = e.request.mode === "navigate" || url.pathname.endsWith("/index.html");
+  if (isNav) {
+    // network-first: 새 버전을 올리면 다음 접속 때 바로 반영, 오프라인이면 캐시로
+    e.respondWith(
+      fetch(e.request).then(res => {
         const copy = res.clone();
-        caches.open(CACHE).then(c => c.put(e.request, copy));
-      }
-      return res;
-    }).catch(() => caches.match("./index.html")))
-  );
+        caches.open(CACHE).then(c => c.put("./index.html", copy));
+        return res;
+      }).catch(() => caches.match("./index.html", { ignoreSearch: true }))
+    );
+  } else {
+    // 정적 자원(아이콘 등)은 cache-first
+    e.respondWith(
+      caches.match(e.request, { ignoreSearch: true }).then(hit => hit || fetch(e.request).then(res => {
+        if (res.ok && url.origin === location.origin) {
+          const copy = res.clone();
+          caches.open(CACHE).then(c => c.put(e.request, copy));
+        }
+        return res;
+      }))
+    );
+  }
 });
